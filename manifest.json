@@ -3,9 +3,7 @@
   "name": "ordnet.dk - dansk ordbog",
   "version": "1.0",
   "short_name": "ordnet.dk",
-  "description": "Foretag hurtige opslag i ordnets danske ordbog. Opslag kan udføres enten ved at klikke på det lille ikon i højre hjørne af browseren for derefter at indtaste det pågældende ord. 
-  Eller ved at markere et ord i browseren og dernæst højreklikke og slå op derigennem. Alternativt kan udvidelsen åbnes ved at trykke Ctrl + Shift + U.
-  Ingen tilknytning til ordnet.dk.",
+  "description": "Foretag hurtige opslag i ordnets.dk danske ordbog.",
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
