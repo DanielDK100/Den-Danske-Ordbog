@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "ordnet.dk - dansk ordbog",
+  "version": "1.0",
+  "short_name": "ordnet.dk",
+  "description": "ordnet.dk - dansk ordbog",
+  "browser_action": {
+    "default_popup": "popup.html"
+    },
+    "permissions": [
+    "activeTab",
+    "<all_urls>"
+    ]
+  }
