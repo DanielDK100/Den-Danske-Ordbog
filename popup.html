@@ -8,7 +8,7 @@
 	<title data-ng-bind="manifest.name"></title>
 </head>
 <body>
-	<main ng-init="init()" class="container">
+	<main data-ng-init="init()" class="container">
 		<header class="row form-group col-md-12">
 			<h3 data-ng-bind="manifest.name"></h3>
 			<input data-ng-model="soegetekst" data-ng-change="onChange()" data-ng-model-options="{debounce: 300}" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
@@ -23,15 +23,15 @@
 			</h3>
 			<h5>
 				<code>Bøjning:</code>
-				<span ng-bind="boejning" class="label label-danger"></span>
+				<span data-ng-bind="boejning" class="label label-danger"></span>
 			</h5>
 			<h5>
 				<code>Udtale:</code>
-				<span ng-bind="udtale" class="label label-danger"></span>
+				<span data-ng-bind="udtale" class="label label-danger"></span>
 			</h5>
 			<h5>
 				<code>Oprindelse:</code>
-				<span ng-bind="oprindelse" class="label label-danger"></span>
+				<span data-ng-bind="oprindelse" class="label label-danger"></span>
 			</h5>
 		</section>
 		<section class="row col-md-12">
@@ -62,7 +62,7 @@
 			<hr class="row" />
 		</section>
 		<footer class="text-right">
-			<p><a href="http://ordnet.dk/ddo" target="_blank">ordnet.dk</a></p>
+			<p><a href="http://ordnet.dk/ddo" target="_blank" data-toggle="tooltip" data-placement="left" title="ordnet.dk - Den Danske Ordbog">ordnet.dk</a></p>
 		</footer>
 	</main>
 	<script src="js/jquery.min.js"></script>
