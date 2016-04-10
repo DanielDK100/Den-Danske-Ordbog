@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-ng-app="ordnet" data-ng-controller="OrdnetController">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
 	<link rel="stylesheet" href="css/styles.css" />
@@ -9,25 +9,61 @@
 </head>
 <body>
 	<main ng-init="init()" class="container">
-		<section class="row form-group col-md-12">
-			<h2 data-ng-bind="manifest.name"></h2>
-			<input data-ng-model="soegetekst" data-ng-change="onChange()" data-ng-model-options="{debounce: 500}" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
+		<header class="row form-group col-md-12">
+			<h3 data-ng-bind="manifest.name"></h3>
+			<input data-ng-model="soegetekst" data-ng-change="onChange()" data-ng-model-options="{debounce: 300}" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
+		</header>
+		<section>
+			<hr class="row" />
+			<h3>
+				<span data-ng-repeat="ord in ord">
+					<span data-ng-bind="ord" class="text-danger"></span><span data-ng-show="!$last">,</span>
+				</span>
+				<small data-ng-bind="ordklasse" class="text-muted"></small>
+			</h3>
+			<h5>
+				<code>Bøjning:</code>
+				<span ng-bind="boejning" class="label label-danger"></span>
+			</h5>
+			<h5>
+				<code>Udtale:</code>
+				<span ng-bind="udtale" class="label label-danger"></span>
+			</h5>
+			<h5>
+				<code>Oprindelse:</code>
+				<span ng-bind="oprindelse" class="label label-danger"></span>
+			</h5>
 		</section>
-		<hr class="row" />
 		<section class="row col-md-12">
-			<h3>Betydning</h3>
-			<div data-ng-bind="betydning1"></div>
-			<h4>Synonymer</h4>
-			<span data-ng-bind="synonym" class="label label-primary">Primary</span>
+			<hr class="row" />
+			<h4>Betydninger</h4>
+			<div data-ng-repeat="betydning in betydninger">
+				<p>
+					<span data-ng-bind="$index + 1 + '.'" class="badge badge-primary"></span>
+					<span data-ng-bind="betydning"></span>
+				</p>
+			</div>
+			<hr class="row" />
+			<!-- <h5>
+				Synonymer:
+				<span data-ng-bind="synonymer" class="label label-primary"></span>
+			</h5>
+			<h5>
+				Antonymer:
+				<span data-ng-bind="antonymer" class="label label-danger"></span>
+			</h5>-->
 		</section>
-		<hr class="row" />
-		<div class="row col-md-12">
-			<h3>Mente du</h3>
-			<span ng-repeat="mente in menteDu">
-				<span ng-bind="mente" class="label label-default"></span>
+		
+		<section class="row col-md-12">
+			<h4>Mente du</h4>
+			<span data-ng-repeat="mente in menteDu">
+				<span data="{{mente}}" data-ng-click="menteDuClick(mente)" data-ng-bind="mente" role="button" class="label label-primary"></span>
 			</span>
-		</div>
-		<hr class="row" />
+			<hr class="row" />
+		</section>
+		<footer class="text-right">
+			<p><a href="http://ordnet.dk/ddo" target="_blank">ordnet.dk</a></p>
+		</footer>
 	</main>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

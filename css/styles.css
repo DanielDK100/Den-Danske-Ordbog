@@ -1,4 +1,7 @@
-body {
-	width:300px;
+.container {
+	width: 350px;
 	word-wrap: break-word;
+}
+.label {
+	white-space: normal;
 }
