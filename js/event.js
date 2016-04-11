@@ -1,7 +1,7 @@
 const URL = 'http://ordnet.dk/ddo';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
-		title: 'Slå \'%s\' op i ordbogen', 
+		title: 'Slå \"%s\" op i ordbogen', 
 		contexts:['selection'],
 		id: 'context' + 'selection'
 	});  
@@ -36,8 +36,8 @@ function klikHandler(info, tab) {
 				error: function(html) {
 					var opt = {
 						type: 'basic',
-						title: 'Ingen resultater med \'' + nytOrd + '\'',
-						message: 'Der blev ikke fundet nogen resultater med søgningen \'' + nytOrd + '\'. Prøv en anden søgetekst.',
+						title: 'Ingen resultater med \"' + nytOrd + '"\'',
+						message: 'Der blev ikke fundet nogen resultater med søgningen \"' + nytOrd + '"\'. Prøv en anden søgetekst.',
 						iconUrl: 'img/ikon128.png',
 						priority: 0
 					}
