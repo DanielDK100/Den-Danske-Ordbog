@@ -36,8 +36,8 @@ function klikHandler(info, tab) {
 				error: function(html) {
 					var opt = {
 						type: 'basic',
-						title: 'Ingen resultater med \"' + nytOrd + '"\'',
-						message: 'Der blev ikke fundet nogen resultater med søgningen \"' + nytOrd + '"\'. Prøv en anden søgetekst.',
+						title: 'Ingen resultater med \"' + nytOrd + '\"',
+						message: 'Der blev ikke fundet nogen resultater med søgningen \"' + nytOrd + '\".' +  ' Prøv en anden søgetekst.',
 						iconUrl: 'img/ikon128.png',
 						priority: 0
 					}

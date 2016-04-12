@@ -30,6 +30,6 @@
           "notifications",
           "storage",
           "contextMenus",
-          "<all_urls>"
+          "http://*/"
           ]
         }
