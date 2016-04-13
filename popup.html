@@ -10,8 +10,8 @@
 <body>
 	<main data-ng-init="initialiser()" class="container">
 		<header class="row form-group col-md-12">
-			<h3 data-ng-bind="manifest.name"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
+			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" style="background: url({{manifest.icons['128']}}) no-repeat right / 20px content-box;" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
 		</header>
 		<section class="row col-md-12">
 			<hr class="row" />
@@ -34,8 +34,8 @@
 				<span data-ng-bind="oprindelse" class="label label-danger"></span>
 			</h5>
 			<h5>
-				<code>Syno- og antonymer:</code>
-				<span data-ng-bind="synonymerOgAntonymer" class="label label-danger"></span>
+				<code>Andet:</code>
+				<span data-ng-bind="andet" class="label label-danger"></span>
 			</h5>
 		</section>
 		<section class="row col-md-12">

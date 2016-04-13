@@ -8,41 +8,46 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
 function klikHandler(info, tab) {
+	var manifest = chrome.runtime.getManifest();
 	var i = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.map((soegetekst).split(' '), function(nytOrd) {
 		if (i < 5) {
 			$.ajax({
-				url: URL + '/ordbog?query=' + nytOrd,
-				type: 'GET',
-				success: function(html){ 
-					var ord = new Array();
-					$('div.definitionBoxTop > span.match', html).each(function() {
-						ord.push($(this).text());
-					});
-					var betydning = $(html).find('#betydning-1 > span > span').text();
-					var ordklasse = $(html).find('div.definitionBoxTop > span.tekstmedium.allow-glossing').text();
+				method: 'GET',
+				url: URL + '/ordbog?query=' + nytOrd
+			})
+			.done(function(html) {
+				var ord = new Array();
+				$('div.definitionBoxTop > span.match', html).each(function() {
+					ord.push($(this).text().replace(/\d+/g, ''));
+				});
+				var betydning = $(html).find('#betydning-1 > span > span').text();
+				var ordklasse = $(html).find('div.definitionBoxTop > span.tekstmedium.allow-glossing').text();
 
-					var opt = {
-						type: 'basic',
-						title: ord.toString(),
-						message: betydning,
-						contextMessage: ordklasse,
-						iconUrl: 'img/ikon128.png',
-						priority: 0
-					}
-					chrome.notifications.create(nytOrd, opt);
-				},
-				error: function(html) {
-					var opt = {
-						type: 'basic',
-						title: 'Ingen resultater med \"' + nytOrd + '\"',
-						message: 'Der blev ikke fundet nogen resultater med søgningen \"' + nytOrd + '\".' +  ' Prøv en anden søgetekst.',
-						iconUrl: 'img/ikon128.png',
-						priority: 0
-					}
-					chrome.notifications.create(nytOrd, opt);
+				var opt = {
+					type: 'basic',
+					title: ord.toString(),
+					message: betydning,
+					contextMessage: ordklasse,
+					iconUrl: manifest.icons['128'],
+					priority: 0
 				}
+				chrome.notifications.create(nytOrd, opt);
+			}).fail(function(html) {
+				var menteDu = new Array();
+				$('#alikebox-show-all > a', html.responseText).each(function() {
+					menteDu.push($(this).text());
+				});
+
+				var opt = {
+					type: 'basic',
+					title: 'Ingen resultater med \"' + nytOrd + '\"',
+					message: 'Mente du: ' + menteDu.toString(),
+					iconUrl: manifest.icons['128'],
+					priority: 0
+				}
+				chrome.notifications.create(nytOrd, opt);
 			});
 			chrome.notifications.onClicked.addListener(function notificationId() {
 				chrome.tabs.create({url: URL + '/ordbog?query=' + nytOrd}, function tab() {
