@@ -62,7 +62,7 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
             var opt = {
                 type: 'basic',
                 title: 'Ingen resultater med \"' + $scope.soegetekst + '\"',
-                message: 'Der blev ikke fundet nogen resultater med søgningen \"' + $scope.soegetekst + '\".' +  ' Prøv en anden søgetekst.',
+                message: 'Mente du: ' + menteDu.toString(),
                 iconUrl: $scope.manifest.icons['128'],
                 priority: 0
             }
