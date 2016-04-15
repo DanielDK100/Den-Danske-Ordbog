@@ -3,29 +3,50 @@ ordnet.config([
     '$compileProvider', function( $compileProvider ) {   
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     }]);
-ordnet.constant('URL', 'http://ordnet.dk/ddo');
+ordnet.constant('URL', 'http://ordnet.dk');
 ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
     $scope.initialiser = function() {
         $scope.manifest = chrome.runtime.getManifest();
-        $('[data-toggle="tooltip"]').tooltip(); 
+        $scope.background = {
+            'background': 'url("' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box' 
+        };
 
         if ($location.search().soegetekst != null) {
             $scope.soegetekst = $location.search().soegetekst;
-            $scope.soeg($scope.soegetekst);    
+            soeg($scope.soegetekst);    
         }
     };
     $scope.vedAendring = function() {
-        $scope.soeg($scope.soegetekst);
+        autocomplete($scope.soegetekst);
+        soeg($scope.soegetekst);
+    };
+    function autocomplete(soegetekst) {
+        var autocomplete = new Array();
+        $http.get(URL + '/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
+        .then(function(response) {
+            var html = response.data;
+
+            $(html).each(function(index, value) {
+                autocomplete.push(value);
+            });
+
+            $scope.autocomplete = autocomplete;
+        });
+    };
+    $scope.lukAutocomplete = function() {
+        $scope.luk = true;
     };
     $scope.menteDuKlik = function(mente) {
         $scope.soegetekst = mente;  
-        $scope.soeg($scope.soegetekst);
+        soeg($scope.soegetekst);
     };
-    $scope.soeg = function(soegetekst) {
+    function soeg(soegetekst) {
+        $scope.luk = false;
         var ord = new Array();
         var betydninger = new Array();
         var menteDu = new Array();
-        $http.get(URL + '/ordbog?query=' + soegetekst)
+
+        $http.get(URL + '/ddo/ordbog?query=' + soegetekst)
         .then(function(response) {
             var html = response.data;
 
@@ -53,23 +74,10 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         }, function errorCallback(response) {
             var html = response.data;
             fejl(null);
-
-            $('#alikebox-show-all > a', html).each(function() {
-                menteDu.push($(this).text());
-            });
-            $scope.menteDu = menteDu;
-
-            var opt = {
-                type: 'basic',
-                title: 'Ingen resultater med \"' + $scope.soegetekst + '\"',
-                message: 'Mente du: ' + menteDu.toString(),
-                iconUrl: $scope.manifest.icons['128'],
-                priority: 0
-            }
-            chrome.notifications.create($scope.soegetekst, opt);
         });
     }
     function fejl(fejl) {
+        $scope.autoComplete = fejl;
         $scope.ord = fejl;
         $scope.ordklasse = fejl;
         $scope.betydninger = fejl;
@@ -77,26 +85,17 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         $scope.udtale = fejl;
         $scope.oprindelse = fejl;
         $scope.andet = fejl;
+        $scope.menteDu = fejl;
     }
     $scope.dagensOrd = function() {
-        $http.get(URL)
+        $http.get(URL + '/ddo')
         .then(function(response) {
             var html = response.data;
 
             var dagensOrd = $(html).find('.dagensord > .match').text() ? $(html).find('.dagensord > .match').text() : null;
             if (dagensOrd != null) {
                 $scope.soegetekst = dagensOrd;
-                $scope.soeg($scope.soegetekst);
-            }
-            else {
-                var opt = {
-                    type: 'basic',
-                    title: 'Dagens ord blev ikke fundet',
-                    message: 'Der blev ikke fundet nogen resultater med dagens ord.',
-                    iconUrl: $scope.manifest.icons['128'],
-                    priority: 0
-                }
-                chrome.notifications.create(opt);
+                soeg($scope.soegetekst);
             }
         });
     };

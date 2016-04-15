@@ -1,4 +1,4 @@
-const URL = 'http://ordnet.dk/ddo';
+const URL = 'http://ordnet.dk';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
@@ -15,7 +15,7 @@ function klikHandler(info, tab) {
 		if (i < 5) {
 			$.ajax({
 				method: 'GET',
-				url: URL + '/ordbog?query=' + nytOrd
+				url: URL + '/ddo/ordbog?query=' + nytOrd
 			})
 			.done(function(html) {
 				var ord = new Array();
@@ -50,7 +50,7 @@ function klikHandler(info, tab) {
 				chrome.notifications.create(nytOrd, opt);
 			});
 			chrome.notifications.onClicked.addListener(function notificationId() {
-				chrome.tabs.create({url: URL + '/ordbog?query=' + nytOrd}, function tab() {
+				chrome.tabs.create({url: URL + '/ddo/ordbog?query=' + nytOrd}, function tab() {
 					chrome.notifications.clear(nytOrd);
 				});
 			})

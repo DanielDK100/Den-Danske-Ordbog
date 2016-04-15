@@ -1,6 +1,14 @@
 .container {
+	position: relative;
 	width: 350px;
+	background: url('../img/lion.png') no-repeat right bottom 60px / 150px;
 	word-wrap: break-word;
+}
+.auto-complete {
+	position: absolute;
+	width: 100%;
+	background: white;
+	z-index: 1;
 }
 .label {
 	white-space: normal;
