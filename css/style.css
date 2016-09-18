@@ -1,15 +1,25 @@
 .container {
-	position: relative;
 	width: 350px;
 	background: url('../img/lion.png') no-repeat right bottom 60px / 150px;
 	word-wrap: break-word;
 }
-.auto-complete {
-	position: absolute;
-	width: 100%;
-	background: white;
-	z-index: 1;
+#autocomplete p {
+	padding: 5px;
+}
+#autocomplete p:hover {
+	background: #598AA3;
+	color: white;
+}
+.selected {
+	background: #598AA3;
+}
+.selected p {
+	color: white;
 }
 .label {
 	white-space: normal;
+	line-height: 20px;
+}
+#udtaleAudio {
+	cursor: pointer;
 }

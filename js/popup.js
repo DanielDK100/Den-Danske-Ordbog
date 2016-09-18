@@ -5,7 +5,7 @@ ordnet.config([
     }]);
 ordnet.constant('URL', 'http://ordnet.dk');
 ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
-    $scope.initialiser = function() {
+    $scope.initialiser = function() {        
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
             'background': 'url("' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box' 
@@ -17,10 +17,10 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         }
     };
     $scope.vedAendring = function() {
-        autocomplete($scope.soegetekst);
+        //autocomplete($scope.soegetekst);
         soeg($scope.soegetekst);
     };
-    function autocomplete(soegetekst) {
+    /*function autocomplete(soegetekst) {
         var autocomplete = new Array();
         $http.get(URL + '/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
         .then(function(response) {
@@ -32,7 +32,7 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
 
             $scope.autocomplete = autocomplete;
         });
-    };
+    };*/
     $scope.lukAutocomplete = function() {
         $scope.luk = true;
     };
@@ -64,6 +64,11 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
             $scope.betydninger = betydninger;
             $scope.boejning = $(html).find('#id-boj > span.tekstmedium.allow-glossing').text() ? $(html).find('#id-boj > span.tekstmedium.allow-glossing').text() : null;
             $scope.udtale = $(html).find('#id-udt > span.tekstmedium.allow-glossing > span').text() ? $(html).find('#id-udt > span.tekstmedium.allow-glossing > span').text() : null;
+            $scope.udtaleAudio = $(html).find('#id-udt > span.tekstmedium.allow-glossing > span > audio > div > a').attr('href') ? $(html).find('#id-udt > span.tekstmedium.allow-glossing > span > audio > div > a').attr('href') : null;
+            $('audio').attr('src', $scope.udtaleAudio);
+            $('#udtaleAudio').click(function(){
+                $('audio').trigger('play');
+            });
             $scope.oprindelse = $(html).find('#id-ety > span.tekstmedium.allow-glossing').text() ? $(html).find('#id-ety > span.tekstmedium.allow-glossing').text() : null;
             $scope.andet = $(html).find('#content-betydninger > div:nth-child(2) > div.definitionBox.onym').text() ? $(html).find('#content-betydninger > div:nth-child(2) > div.definitionBox.onym').text() : null;
 
@@ -83,6 +88,7 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         $scope.betydninger = fejl;
         $scope.boejning = fejl;
         $scope.udtale = fejl;
+        $scope.udtaleAudio = fejl;
         $scope.oprindelse = fejl;
         $scope.andet = fejl;
         $scope.menteDu = fejl;
