@@ -13,6 +13,13 @@ function klikHandler(info, tab) {
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.map((soegetekst).split(' '), function(nytOrd) {
 		if (i < 5) {
+			var opt = {
+				type: 'basic',
+				title: '',
+				message: '',
+				contextMessage: '',
+				iconUrl: manifest.icons['128'],	
+			}
 			$.ajax({
 				method: 'GET',
 				url: URL + '/ddo/ordbog?query=' + nytOrd
@@ -25,31 +32,24 @@ function klikHandler(info, tab) {
 				var betydning = $(html).find('#betydning-1 > span > span').text();
 				var ordklasse = $(html).find('div.definitionBoxTop > span.tekstmedium.allow-glossing').text();
 
-				var opt = {
-					type: 'basic',
-					title: ord.toString(),
-					message: betydning,
-					contextMessage: ordklasse,
-					iconUrl: manifest.icons['128'],
-					priority: 0
-				}
-				chrome.notifications.create(nytOrd, opt);
+				opt.title = ord.toString();
+				opt.message = betydning;
+				opt.contextMessage = ordklasse;
+
 			}).fail(function(html) {
 				var menteDu = new Array();
 				$('#alikebox-show-all > a', html.responseText).each(function() {
 					menteDu.push($(this).text());
 				});
 
-				var opt = {
-					type: 'basic',
-					title: 'Ingen resultater med \"' + nytOrd + '\"',
-					message: 'Mente du: ' + menteDu.toString(),
-					iconUrl: manifest.icons['128'],
-					priority: 0
-				}
+				opt.title = 'Ingen resultater med \"' + nytOrd + '\"';
+				opt.message = 'Mente du: ' + menteDu.toString();
+				opt.contextMessage = null;
+				
+			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
 			});
-			chrome.notifications.onClicked.addListener(function notificationId() {
+			chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 				chrome.tabs.create({url: URL + '/ddo/ordbog?query=' + nytOrd}, function tab() {
 					chrome.notifications.clear(nytOrd);
 				});

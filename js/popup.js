@@ -17,22 +17,8 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         }
     };
     $scope.vedAendring = function() {
-        //autocomplete($scope.soegetekst);
         soeg($scope.soegetekst);
     };
-    /*function autocomplete(soegetekst) {
-        var autocomplete = new Array();
-        $http.get(URL + '/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
-        .then(function(response) {
-            var html = response.data;
-
-            $(html).each(function(index, value) {
-                autocomplete.push(value);
-            });
-
-            $scope.autocomplete = autocomplete;
-        });
-    };*/
     $scope.lukAutocomplete = function() {
         $scope.luk = true;
     };
@@ -66,9 +52,6 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
             $scope.udtale = $(html).find('#id-udt > span.tekstmedium.allow-glossing > span').text() ? $(html).find('#id-udt > span.tekstmedium.allow-glossing > span').text() : null;
             $scope.udtaleAudio = $(html).find('#id-udt > span.tekstmedium.allow-glossing > span > audio > div > a').attr('href') ? $(html).find('#id-udt > span.tekstmedium.allow-glossing > span > audio > div > a').attr('href') : null;
             $('audio').attr('src', $scope.udtaleAudio);
-            $('#udtaleAudio').click(function(){
-                $('audio').trigger('play');
-            });
             $scope.oprindelse = $(html).find('#id-ety > span.tekstmedium.allow-glossing').text() ? $(html).find('#id-ety > span.tekstmedium.allow-glossing').text() : null;
             $scope.andet = $(html).find('#content-betydninger > div:nth-child(2) > div.definitionBox.onym').text() ? $(html).find('#content-betydninger > div:nth-child(2) > div.definitionBox.onym').text() : null;
 
@@ -81,6 +64,9 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
             fejl(null);
         });
     }
+    $scope.afspilUdtale = function(mente) {
+        $('audio').trigger('play'); 
+    };
     function fejl(fejl) {
         $scope.autoComplete = fejl;
         $scope.ord = fejl;

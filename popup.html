@@ -12,13 +12,6 @@
 		<header class="row form-group col-md-12">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
 			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." data-ng-keydown="$event.which === 13 && lukAutocomplete()" class="form-control">
-			<!-- <section data-ng-hide="luk" class="row col-md-12">
-				<div class="auto-complete">
-					<div data-ng-repeat="ord in autocomplete">
-						<p data="{{ord}}" data-ng-click="menteDuKlik(ord)" data-ng-bind="ord" class="text-muted" role="button" ></p>
-					</div>
-				</div>
-			</section> -->
 		</header>
 		<section class="row col-md-12">
 			<hr class="row" />
@@ -35,7 +28,7 @@
 			<h5>
 				<code>Udtale:</code>
 				<span data-ng-bind="udtale" class="label label-danger"></span>
-				<span id="udtaleAudio" class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+				<span data-ng-if="udtaleAudio" data-ng-click="afspilUdtale()" id="udtaleAudio" class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
 				<audio></audio>
 			</h5>
 			<h5>
