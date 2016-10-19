@@ -49,12 +49,12 @@ function klikHandler(info, tab) {
 			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
 			});
-			chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
-				chrome.tabs.create({url: URL + '/ddo/ordbog?query=' + nytOrd}, function tab() {
-					chrome.notifications.clear(nytOrd);
-				});
-			})
 		}
 		i++;
 	})
 };
+chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
+	chrome.tabs.create({url: URL + '/ddo/ordbog?query=' + nytOrd}, function tab() {
+		chrome.notifications.clear(nytOrd);
+	});
+})
