@@ -32,7 +32,7 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         var betydninger = new Array();
         var menteDu = new Array();
 
-        $http.get(URL + '/ddo/ordbog?query=' + soegetekst)
+        $http.get(URL + '/ddo/ordbog', {params: {query: soegetekst}})
         .then(function(response) {
             var html = response.data;
 

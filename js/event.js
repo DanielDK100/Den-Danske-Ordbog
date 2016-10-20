@@ -20,10 +20,7 @@ function klikHandler(info, tab) {
 				contextMessage: '',
 				iconUrl: manifest.icons['128'],	
 			}
-			$.ajax({
-				method: 'GET',
-				url: URL + '/ddo/ordbog?query=' + nytOrd
-			})
+			$.get(URL + '/ddo/ordbog', {query: nytOrd}, function(){})
 			.done(function(html) {
 				var ord = new Array();
 				$('div.definitionBoxTop > span.match', html).each(function() {
@@ -35,7 +32,6 @@ function klikHandler(info, tab) {
 				opt.title = ord.toString();
 				opt.message = betydning;
 				opt.contextMessage = ordklasse;
-
 			}).fail(function(html) {
 				var menteDu = new Array();
 				$('#alikebox-show-all > a', html.responseText).each(function() {
@@ -45,7 +41,6 @@ function klikHandler(info, tab) {
 				opt.title = 'Ingen resultater med \"' + nytOrd + '\"';
 				opt.message = 'Mente du: ' + menteDu.toString();
 				opt.contextMessage = null;
-				
 			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
 			});
