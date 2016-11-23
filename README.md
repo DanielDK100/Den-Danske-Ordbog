@@ -4,5 +4,4 @@ Foretag hurtige opslag i ordnets danske ordbog. Opslag kan udføres enten ved at
 Ingen tilknytning til [ordnet.dk](http://ordnet.dk/ddo).
 
 # Installation
-[Chrome Webshop - ordnet.dk - dansk ordbog](https://chrome.google.com)
-- eller download denne repository og indlæs udvidelsen manuelt under `chrome://extensions/`.
+[Chrome Webshop - ordnet.dk - dansk ordbog](https://chrome.google.com) - eller download denne repository og indlæs udvidelsen manuelt under `chrome://extensions/`.
