@@ -5,4 +5,4 @@ Ingen tilknytning til [ordnet.dk](http://ordnet.dk/ddo).
 
 # Installation
 [Chrome Webshop - ordnet.dk - dansk ordbog](https://chrome.google.com)
-Eller download denne repository og indlæs udvidelsen manuelt under `chrome://extensions/`.
+- eller download denne repository og indlæs udvidelsen manuelt under `chrome://extensions/`.
