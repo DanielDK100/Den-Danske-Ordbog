@@ -1,4 +1,3 @@
-const URL = 'http://ordnet.dk';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
@@ -18,28 +17,16 @@ function klikHandler(info, tab) {
 				title: '',
 				message: '',
 				contextMessage: '',
-				iconUrl: manifest.icons['128'],	
+				iconUrl: manifest.icons['128'],
 			}
-			$.get(URL + '/ddo/ordbog', {query: nytOrd}, function(){})
+			$.getJSON(URL + '/ord/' + nytOrd, function(){})
 			.done(function(html) {
-				var ord = new Array();
-				$('div.definitionBoxTop > span.match', html).each(function() {
-					ord.push($(this).text().replace(/\d+/g, ''));
-				});
-				var betydning = $(html).find('#betydning-1 > span > span').text();
-				var ordklasse = $(html).find('div.definitionBoxTop > span.tekstmedium.allow-glossing').text();
-
-				opt.title = ord.toString();
-				opt.message = betydning;
-				opt.contextMessage = ordklasse;
+				opt.title = html.ord;
+				opt.message = html.betydninger[0];
+				opt.contextMessage = html.ordklasse;
 			}).fail(function(html) {
-				var menteDu = new Array();
-				$('#alikebox-show-all > a', html.responseText).each(function() {
-					menteDu.push($(this).text());
-				});
-
 				opt.title = 'Ingen resultater med \"' + nytOrd + '\"';
-				opt.message = 'Mente du: ' + menteDu.toString();
+				opt.message = 'Mente du: ' + html.menteDu.toString();
 				opt.contextMessage = null;
 			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
@@ -49,7 +36,7 @@ function klikHandler(info, tab) {
 	})
 };
 chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
-	chrome.tabs.create({url: URL + '/ddo/ordbog?query=' + nytOrd}, function tab() {
+	chrome.tabs.create({url: 'http://ordnet.dk/ddo/ordbog?query=' + nytOrd}, function tab() {
 		chrome.notifications.clear(nytOrd);
 	});
 })
