@@ -1,3 +1,4 @@
+const URL = 'http://ordnet.danielwinther.dk/public';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
