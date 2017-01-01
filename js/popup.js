@@ -39,6 +39,8 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
             $scope.andet = html.andet;
             $scope.betydninger = html.betydninger;
             $scope.menteDu= html.menteDu;
+        }, function(response) {
+            $scope.ord = 'Ingen resultater med "' + soegetekst + '"';
         });
     }
     $scope.afspilUdtale = function(mente) {

@@ -27,7 +27,6 @@ function klikHandler(info, tab) {
 				opt.contextMessage = html.ordklasse;
 			}).fail(function(html) {
 				opt.title = 'Ingen resultater med \"' + nytOrd + '\"';
-				opt.message = 'Mente du: ' + html.menteDu.toString();
 				opt.contextMessage = null;
 			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
