@@ -3,7 +3,7 @@ ordnet.config([
     '$compileProvider', function( $compileProvider ) {   
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     }]);
-ordnet.constant('URL', 'http://localhost/ordnet.dk---dansk-ordbog-REST/public');
+ordnet.constant('URL', 'http://ordnet.danielwinther.dk/public');
 ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
     $scope.initialiser = function() {        
         $scope.manifest = chrome.runtime.getManifest();
