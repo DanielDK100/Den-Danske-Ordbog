@@ -24,7 +24,16 @@ ordnet.controller('OrdnetController', function($scope, $http, $location, URL) {
         soeg($scope.soegetekst);
     };
     function soeg(soegetekst) {
-        $scope.luk = false;
+        /*$http.get(URL + '/autocomplete/' + soegetekst)
+        .then(function(response) {
+            var html = response.data;
+
+            $('#autocomplete').autocomplete({
+              source: html
+          });
+        }, function(response) {
+        });*/
+
         $http.get(URL + '/ord/' + soegetekst)
         .then(function(response) {
             var html = response.data;

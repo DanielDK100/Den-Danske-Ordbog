@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="css/jquery-ui.min.css" />
 	<link rel="stylesheet" href="css/style.css" />
 	<title data-ng-bind="manifest.name"></title>
 </head>
@@ -11,7 +12,7 @@
 	<main data-ng-init="initialiser()" class="container">
 		<header class="row form-group col-md-12">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control">
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control" id="autocomplete">
 		</header>
 		<section class="row col-md-12">
 			<hr class="row" />
@@ -60,9 +61,9 @@
 			<p><button data-ng-click="dagensOrd()" class="btn btn-block">Dagens ord</button></p>
 		</footer>
 	</main>
-	<script type="text/javascript"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/popup.js"></script>
 </body>
