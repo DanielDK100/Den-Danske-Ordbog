@@ -1,6 +1,6 @@
 var ordnet = angular.module('ordnet', ['ngSanitize']);
 ordnet.config([
-    '$compileProvider', function( $compileProvider ) {   
+    '$compileProvider', function($compileProvider) {   
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     }]);
 ordnet.constant('URL', 'http://ws.dsl.dk/ddo/query?q=');
