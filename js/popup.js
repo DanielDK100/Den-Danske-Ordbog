@@ -27,6 +27,6 @@ ordnet.controller('OrdnetController', function($scope, $location, URL) {
             $scope.$apply(function() { 
                $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
            });
-        }, function(html) {});
+        });
     }
 });
