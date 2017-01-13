@@ -5,8 +5,17 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
 	<link rel="stylesheet" href="css/jquery-ui.min.css" />
-	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="http://static.ordnet.dk/app/ordnetapp.css" />
 	<title data-ng-bind="manifest.name"></title>
+	<style>
+		body {	
+			width: 400px;
+			margin-bottom: 20px;
+		}
+		.audio {
+			display: none;
+		}
+	</style>
 </head>
 <body>
 	<main data-ng-init="initialiser()" class="container">
@@ -14,57 +23,14 @@
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
 			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control" id="autocomplete">
 		</header>
-		<section class="row col-md-12">
-			<hr class="row" />
-			<h3>
-				<span data-ng-bind="ord" class="text-danger"></span>
-				<small data-ng-bind="ordklasse" class="text-muted"></small>
-			</h3>
-			<h5>
-				<code>Bøjning:</code>
-				<span data-ng-bind="boejning" class="label label-danger"></span>
-			</h5>
-			<h5>
-				<code>Udtale:</code>
-				<span data-ng-bind="udtale" class="label label-danger"></span>
-				<span data-ng-if="udtaleAudio" data-ng-click="afspilUdtale()" id="udtaleAudio" class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-				<audio></audio>
-			</h5>
-			<h5>
-				<code>Oprindelse:</code>
-				<span data-ng-bind="oprindelse" class="label label-danger"></span>
-			</h5>
-			<h5>
-				<code>Andet:</code>
-				<span data-ng-bind="andet" class="label label-danger"></span>
-			</h5>
-		</section>
-		<section class="row col-md-12">
-			<hr class="row" />
-			<h4>Betydninger</h4>
-			<div data-ng-repeat="betydning in betydninger">
-				<p>
-					<span data-ng-bind="$index + 1 + '.'" class="badge badge-primary"></span>
-					<span data-ng-bind="betydning"></span>
-				</p>
-			</div>
-			<hr class="row" />
-		</section>
-		<section class="row col-md-12">
-			<h4>Mente du</h4>
-			<span data-ng-repeat="mente in menteDu">
-				<span data="{{mente}}" data-ng-click="menteDuKlik(mente)" data-ng-bind="mente" role="button" class="label label-primary"></span>
-			</span>
-			<hr class="row" />
-		</section>
-		<footer class="row col-md-12">
-			<p><button data-ng-click="dagensOrd()" class="btn btn-block">Dagens ord</button></p>
-		</footer>
+		<section data-ng-bind-html="html"></section>
 	</main>
+	<script src="js/analyticstracking.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/angular.min.js"></script>
+	<script src="js/angular-sanitize.min.js"></script>
 	<script src="js/popup.js"></script>
 </body>
 </html>

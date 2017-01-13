@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ordnet.dk - dansk ordbog",
-  "version": "1.7",
+  "version": "1.8",
   "short_name": "ordnet.dk",
   "description": "Foretag hurtige opslag i ordnets.dk danske ordbog.",
   "commands": {
@@ -25,6 +25,7 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "permissions": [
     "activeTab",
     "notifications",

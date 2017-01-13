@@ -1,4 +1,4 @@
-const URL = 'http://ordnet.danielwinther.dk/public';
+const URL = 'http://ws.dsl.dk/ddo/query?q=';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function() {
 	});  
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
-function klikHandler(info, tab) {
+function klikHandler(info, tab) {	
 	var manifest = chrome.runtime.getManifest();
 	var i = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
@@ -20,14 +20,13 @@ function klikHandler(info, tab) {
 				contextMessage: '',
 				iconUrl: manifest.icons['128'],
 			}
-			$.getJSON(URL + '/ord/' + nytOrd, function(){})
+			$.get(URL + nytOrd, function(){})
 			.done(function(html) {
-				opt.title = html.ord;
-				opt.message = html.betydninger[0];
-				opt.contextMessage = html.ordklasse;
-			}).fail(function(html) {
-				opt.title = 'Ingen resultater med \"' + nytOrd + '\"';
-				opt.contextMessage = null;
+				var html = $(html).filter('.ar')[0];
+
+				opt.title = $(html).find('.head').text().trim() ? $(html).find('.head').text().trim() : 'Ingen resultater med \"' + nytOrd + '\"';
+				opt.message = $(html).find('.dtrn').text().trim();
+				opt.contextMessage = $(html).find('.pos').text().trim();
 			}).always(function(){
 				chrome.notifications.create(nytOrd, opt);
 			});
