@@ -24,7 +24,7 @@ function klikHandler(info, tab) {
 			.done(function(html) {
 				var html = $(html).filter('.ar')[0];
 
-				opt.title = $(html).find('.head').first().text().trim() ? $(html).find('.head').text().trim() : 'Ingen resultater med \"' + nytOrd + '\"';
+				opt.title = $(html).find('.head').first().text().trim() ? $(html).find('.head').first().text().trim() : 'Ingen resultater med \"' + nytOrd + '\"';
 				opt.message = $(html).find('.dtrn').first().text().trim();
 				opt.contextMessage = $(html).find('.pos').first().text().trim();
 			}).always(function(){
