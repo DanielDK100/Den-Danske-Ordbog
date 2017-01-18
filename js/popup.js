@@ -32,8 +32,8 @@ ordnet.controller('OrdController', function($scope, $http, $location, URL) {
             var html = $(html).filter('.ar')[0];
 
             $scope.$apply(function() { 
-             $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
-         });
+                $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
+            });
         });
     }
 });
