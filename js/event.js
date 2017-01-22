@@ -4,10 +4,10 @@ chrome.runtime.onInstalled.addListener(function() {
 		title: 'Slå \"%s\" op i ordbogen', 
 		contexts:['selection'],
 		id: 'context' + 'selection'
-	});  
+	});
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
-function klikHandler(info, tab) {	
+function klikHandler(info, tab) {
 	var manifest = chrome.runtime.getManifest();
 	var i = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
