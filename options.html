@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html data-ng-app="ordnet" data-ng-controller="IndstillingerController">
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+	<title data-ng-bind="manifest.name"></title>
+</head>
+<body>
+	<main data-ng-init="initialiser()" class="container">
+		<h1 class="text-center">(Virker ikke)</h1>
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<label>Aktivering af autocomplete</label>
+					</td>
+					<td>
+						<label class="radio-inline">
+							<input type="radio" name="til">Til
+						</label>
+					</td>
+					<td>
+						<label class="radio-inline">
+							<input type="radio" name="fra">Fra
+						</label>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr />
+	</main>
+	<script src="js/analyticstracking.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/options.js"></script>
+</body>
+</html>
