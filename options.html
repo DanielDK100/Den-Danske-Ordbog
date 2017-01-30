@@ -8,7 +8,6 @@
 </head>
 <body>
 	<main data-ng-init="initialiser()" class="container">
-		<h1 class="text-center">(Virker ikke)</h1>
 		<table class="table table-condensed">
 			<thead>
 				<tr>
@@ -24,12 +23,12 @@
 					</td>
 					<td>
 						<label class="radio-inline">
-							<input type="radio" name="til">Til
+							<input data-ng-model="indstillinger.autocomplete" data-ng-change="gemIndstillinger(indstillinger.autocomplete)" data-ng-checked="resultat.autocomplete == true ? true : false" data-ng-value="true" type="radio" name="autocomplete">Til
 						</label>
 					</td>
 					<td>
 						<label class="radio-inline">
-							<input type="radio" name="fra">Fra
+							<input data-ng-model="indstillinger.autocomplete" data-ng-change="gemIndstillinger(indstillinger.autocomplete)" data-ng-checked="resultat.autocomplete == false ? true : false" data-ng-value="false" type="radio" name="autocomplete">Fra
 						</label>
 					</td>
 				</tr>
