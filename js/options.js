@@ -14,6 +14,11 @@ ordnet.controller('IndstillingerController', function($scope) {
 
 	function indlaesIndstillinger(indstilling = null) {
 		chrome.storage.sync.get(indstilling, function(resultat) {
+			if (resultat.autocomplete == null) {
+				chrome.storage.sync.set({
+					autocomplete: true
+				});
+			}
 			$scope.resultat = resultat;
 		});
 	}

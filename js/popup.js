@@ -9,7 +9,10 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
     };
     $scope.vedAendring = function() {
         soeg($scope.soegetekst);
-        autocomplete($scope.soegetekst);
+        indlaesIndstillinger('autocomplete');
+        if ($scope.resultat.autocomplete) {
+            autocomplete($scope.soegetekst);
+        }
     };
     function autocomplete(soegetekst) {
         $http.get('http://ordnet.dk/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
@@ -37,6 +40,11 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
             $scope.$apply(function() {
                 $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
             });
+        });
+    }
+    function indlaesIndstillinger(indstilling = null) {
+        chrome.storage.sync.get(indstilling, function(resultat) {
+            $scope.resultat = resultat;
         });
     }
 });
