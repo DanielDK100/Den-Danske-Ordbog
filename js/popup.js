@@ -17,7 +17,7 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
     function autocomplete(soegetekst) {
         $http.get('http://ordnet.dk/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
         .then(function(response) {
-            $('#autocomplete').autocomplete({
+            $('#soegetekst').autocomplete({
               source: response.data,
               autoFocus: true,
               select: function(event, ui) {
@@ -35,6 +35,7 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
     function soeg(soegetekst) {
         $.get(URL + soegetekst)
         .then(function(html) {
+            _gaq.push(['_trackEvent', 'Søgetekst - popup', soegetekst]);
             var html = $(html).filter('.ar')[0];
 
             $scope.$apply(function() {

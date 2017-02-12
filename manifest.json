@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ordnet.dk - dansk ordbog",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "short_name": "ordnet.dk",
   "description": "Foretag hurtige opslag i ordnets.dk danske ordbog.",
   "commands": {

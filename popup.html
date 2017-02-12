@@ -12,7 +12,7 @@
 	<main data-ng-init="initialiser()" class="container">
 		<header class="row form-group col-md-12">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control" id="autocomplete">
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control" id="soegetekst">
 		</header>
 		<section data-ng-bind-html="html"></section>
 	</main>
