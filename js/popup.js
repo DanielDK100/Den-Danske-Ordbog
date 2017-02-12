@@ -1,6 +1,5 @@
 var ordnet = angular.module('ordnet', ['ngSanitize']);
-ordnet.constant('URL', 'http://ws.dsl.dk/ddo/query?q=');
-ordnet.controller('OrdController', function($scope, $http, URL) {
+ordnet.controller('OrdController', function($scope, $http) {
     $scope.initialiser = function() {
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
@@ -33,7 +32,7 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
         });
     }
     function soeg(soegetekst) {
-        $.get(URL + soegetekst)
+        $.get('http://ws.dsl.dk/ddo/query?q=' + soegetekst)
         .then(function(html) {
             _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
             var html = $(html).filter('.ar')[0];

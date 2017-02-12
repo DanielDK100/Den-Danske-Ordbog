@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html data-ng-app="ordnet" data-ng-controller="OrdController">
 <head>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
-	<link rel="stylesheet" href="css/jquery-ui.min.css" />
-	<link rel="stylesheet" href="css/style.css" />
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="http://static.ordnet.dk/app/ordnetapp.css">
+	<link rel="stylesheet" href="css/style.css">
 	<title data-ng-bind="manifest.name"></title>
 </head>
 <body>
 	<main data-ng-init="initialiser()" class="container">
 		<header class="row form-group col-md-12">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" type="text" autofocus placeholder="Indtast søgetekst..." class="form-control" id="soegetekst">
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="Indtast søgetekst..." class="form-control" id="soegetekst" autofocus>
 		</header>
 		<section data-ng-bind-html="html" class="row col-md-12"></section>
 	</main>

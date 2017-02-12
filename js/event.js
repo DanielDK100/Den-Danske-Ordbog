@@ -1,4 +1,3 @@
-const URL = 'http://ws.dsl.dk/ddo/query?q=';
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
@@ -20,7 +19,7 @@ function klikHandler(info, tab) {
 				contextMessage: '',
 				iconUrl: manifest.icons['128'],
 			}
-			$.get(URL + nytOrd, function(){})
+			$.get('http://ws.dsl.dk/ddo/query?q=' + nytOrd, function(){})
 			.done(function(html) {
 				var html = $(html).filter('.ar')[0];
 
