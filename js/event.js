@@ -28,7 +28,7 @@ function klikHandler(info, tab) {
 				opt.message = $(html).find('.dtrn').first().text().trim();
 				opt.contextMessage = $(html).find('.pos').first().text().trim();
 			}).always(function(){
-				_gaq.push(['_trackEvent', 'Søgetekst - event', nytOrd]);
+				_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
 				chrome.notifications.create(nytOrd, opt);
 			});
 		}

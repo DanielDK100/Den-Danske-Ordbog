@@ -35,7 +35,7 @@ ordnet.controller('OrdController', function($scope, $http, URL) {
     function soeg(soegetekst) {
         $.get(URL + soegetekst)
         .then(function(html) {
-            _gaq.push(['_trackEvent', 'Søgetekst - popup', soegetekst]);
+            _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
             var html = $(html).filter('.ar')[0];
 
             $scope.$apply(function() {
