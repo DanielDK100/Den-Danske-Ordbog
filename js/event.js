@@ -1,8 +1,8 @@
 chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({
 		title: 'Slå \"%s\" op i ordbogen', 
-		contexts:['selection'],
-		id: 'context' + 'selection'
+		contexts: ['selection'],
+		id: 'context' + 'selection',
 	});
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
