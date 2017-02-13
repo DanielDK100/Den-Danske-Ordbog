@@ -88,7 +88,7 @@ function knapHandler(info, tab) {
 }
 chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 	chrome.tabs.create({url: 'http://ordnet.dk/ddo/ordbog?query=' + nytOrd}, function tab() {
-		_gaq.push(['_trackEvent', 'Søgning', 'Event - link', info]);
+		_gaq.push(['_trackEvent', 'Søgning', 'Event - link', nytOrd]);
 		chrome.notifications.clear(nytOrd);
 	});
 })
