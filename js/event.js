@@ -25,7 +25,7 @@ function klikHandler(info, tab) {
 
 				opt.title = $(html).find('.head').first().text() ? $(html).find('.head').first().text().trim().replace(/\d+/g, '') : 'Ingen resultater med \"' + nytOrd + '\"';
 				opt.message = $(html).find('.dtrn').first().text().trim();
-				opt.contextMessage = $(html).find('.pos').first().text().trim();
+				opt.contextMessage = $(html).find('.m').first().text().trim();
 			}).always(function(){
 				_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
 				chrome.notifications.create(nytOrd, opt);
