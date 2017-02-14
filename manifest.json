@@ -1,8 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ordnet.dk - dansk ordbog",
-  "version": "2.0.6",
-  "short_name": "ordnet.dk",
+  "version": "2.0.7",
   "description": "Foretag hurtige opslag i ordnets.dk danske ordbog.",
   "commands": {
     "_execute_browser_action": {
@@ -20,7 +19,7 @@
   },
   "background": {
     "persistent": false,
-    "scripts": ["js/jquery.min.js", "js/analyticstracking.js", "js/event.js"]
+    "scripts": ["js/analyticstracking.js", "js/jquery.min.js", "js/event.js"]
   },
   "browser_action": {
     "default_popup": "popup.html"
