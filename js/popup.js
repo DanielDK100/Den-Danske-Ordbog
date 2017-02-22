@@ -8,12 +8,8 @@ ordnet.controller('OrdController', function($scope, $http) {
     };
     $scope.vedAendring = function() {
         soeg($scope.soegetekst);
-        indlaesIndstillinger('autocomplete');
-        if ($scope.resultat.autocomplete) {
-            autocomplete($scope.soegetekst);
-        }
     };
-    function autocomplete(soegetekst) {
+    /*function autocomplete(soegetekst) {
         $http.get('http://ordnet.dk/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
         .then(function(response) {
             $('#soegetekst').autocomplete({
@@ -30,7 +26,7 @@ ordnet.controller('OrdController', function($scope, $http) {
             }
         });
         });
-    }
+    }*/
     function soeg(soegetekst) {
         $.get('http://ws.dsl.dk/ddo/query?q=' + soegetekst)
         .then(function(html) {
@@ -40,11 +36,6 @@ ordnet.controller('OrdController', function($scope, $http) {
             $scope.$apply(function() {
                 $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
             });
-        });
-    }
-    function indlaesIndstillinger(indstilling = null) {
-        chrome.storage.sync.get(indstilling, function(resultat) {
-            $scope.resultat = resultat;
         });
     }
 });
