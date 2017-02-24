@@ -1,5 +1,5 @@
 var ordnet = angular.module('ordnet', ['ngSanitize']);
-ordnet.controller('OrdController', function($scope, $http) {
+ordnet.controller('OrdController', function($scope) {
     $scope.initialiser = function() {
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
@@ -9,26 +9,8 @@ ordnet.controller('OrdController', function($scope, $http) {
     $scope.vedAendring = function() {
         soeg($scope.soegetekst);
     };
-    /*function autocomplete(soegetekst) {
-        $http.get('http://ordnet.dk/ws/ddo/livesearch?text=' + soegetekst + '&size=5')
-        .then(function(response) {
-            $('#soegetekst').autocomplete({
-              source: response.data,
-              autoFocus: true,
-              select: function(event, ui) {
-                soeg(ui.item.value);
-            },
-            open: function(event, ui) {
-                $('.container').css('minHeight', 220);
-            },
-            close: function(event, ui) {
-                $('.container').css('minHeight', 0);
-            }
-        });
-        });
-    }*/
     function soeg(soegetekst) {
-        $.get('http://ws.dsl.dk/ddo/query?q=' + soegetekst)
+        $.get('http://ws.dsl.dk/ddo/query', {q: soegetekst})
         .then(function(html) {
             _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
             var html = $(html).filter('.ar')[0];

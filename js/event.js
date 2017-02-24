@@ -21,7 +21,7 @@ function klikHandler(info, tab) {
 				iconUrl: manifest.icons['128'],
 				buttons: [{title: 'Søg efter synonymer'}, {title: 'Søg efter antonymer'}],
 			}
-			$.get('http://ws.dsl.dk/ddo/query?q=' + nytOrd)
+			$.get('http://ws.dsl.dk/ddo/query', {q: nytOrd})
 			.done(function(html) {
 				var html = $(html).filter('.ar')[0];
 				var title = $(html).find('.head .k').first().text();
@@ -50,7 +50,7 @@ function knapHandler(info, tab) {
 		items: [],
 	}
 
-	$.get('http://ws.dsl.dk/ddo/query?q=' + info)
+	$.get('http://ws.dsl.dk/ddo/query', {q: info})
 	.done(function(html) {
 		var html = $(html).filter('.ar')[0];
 
@@ -64,7 +64,7 @@ function knapHandler(info, tab) {
 				opt.items.push({title: 'Ingen synonymer blev fundet', message: ''});
 			}
 			$.each(synonymer, function(key, synonym) {
-				opt.items.push({title: $(synonym).text().trim(), message: ''});
+				opt.items.push({title: $(synonym).text().trim().capitalize(), message: ''});
 			});
 			break;
 
@@ -77,7 +77,7 @@ function knapHandler(info, tab) {
 				opt.items.push({title: 'Ingen antonymer blev fundet', message: ''});
 			}
 			$.each(antonymer, function(key, antonym) {
-				opt.items.push({title: $(antonym).text().trim(), message: ''});
+				opt.items.push({title: $(antonym).text().trim().capitalize(), message: ''});
 			});
 			break
 		}
@@ -92,3 +92,6 @@ chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 		chrome.notifications.clear(nytOrd);
 	});
 })
+String.prototype.capitalize = function() {
+	return this.charAt(0).toUpperCase() + this.slice(1);
+}
