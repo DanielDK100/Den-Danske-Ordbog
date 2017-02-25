@@ -9,7 +9,7 @@ $(soegetekst).keyup(function(event) {
             $(soegetekst).val(ui.item.value).blur();
         },
         open: function(event, ui) {
-            $('.container').css('minHeight', 220);
+            $('.container').css('minHeight', 240);
         },
         close: function(event, ui) {
             $('.container').css('minHeight', 0);
