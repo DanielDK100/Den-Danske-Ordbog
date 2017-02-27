@@ -9,10 +9,10 @@ chrome.contextMenus.onClicked.addListener(klikHandler);
 chrome.notifications.onButtonClicked.addListener(knapHandler);
 function klikHandler(info, tab) {
 	var manifest = chrome.runtime.getManifest();
-	var i = 0;
+	var antalOrd = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.map((soegetekst).split(' '), function(nytOrd) {
-		if (i < 5) {
+		if (antalOrd < 5) {
 			var opt = {
 				type: 'basic',
 				title: '',
@@ -37,7 +37,7 @@ function klikHandler(info, tab) {
 				chrome.notifications.create(nytOrd, opt);
 			});
 		}
-		i++;
+		antalOrd++;
 	})
 };
 function knapHandler(info, tab) {
