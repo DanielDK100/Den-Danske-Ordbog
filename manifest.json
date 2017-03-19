@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "ordnet.dk - dansk ordbog",
-  "version": "2.1.8",
-  "description": "Foretag hurtige opslag i ordnets.dk danske ordbog.",
+  "name": "Den Danske Ordbog",
+  "version": "2.1.9",
+  "description": "Foretag hurtige opslag i ordnets Den Danske Ordbog.",
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {

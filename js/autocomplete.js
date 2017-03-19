@@ -1,7 +1,7 @@
 var soegetekst = $('#soegetekst');
 
 $(soegetekst).keyup(function(event) {
-    $.getJSON('http://ordnet.dk/ws/ddo/livesearch?text=' + soegetekst.val() + '&size=10', function(response) {
+        $.getJSON('http://ordnet.dk/ws/ddo/livesearch', {text: soegetekst.val(), size: 10}, function(response) {
         soegetekst.autocomplete({
           source: response,
           autoFocus: true,

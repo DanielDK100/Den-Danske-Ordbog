@@ -1,5 +1,5 @@
-var ordnet = angular.module('ordnet', ['ngSanitize']);
-ordnet.controller('OrdController', function($scope) {
+var ordbog = angular.module('ordbog', ['ngSanitize']);
+ordbog.controller('OrdController', function($scope) {
     $scope.initialiser = function() {
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
