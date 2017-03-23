@@ -1,6 +1,7 @@
 var ordbog = angular.module('ordbog', ['ngSanitize']);
 ordbog.controller('OrdController', function($scope) {
     $scope.initialiser = function() {
+        console.log('Udviklet i AngularJS v' + angular.version.full);
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
             'background': 'url("' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box'

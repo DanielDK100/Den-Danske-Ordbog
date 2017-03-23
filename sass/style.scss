@@ -1,6 +1,10 @@
-.container {
-	width: 350px;
-}
-.audio {
-	display: none;
+$popup-width: 350px;
+
+body {
+	.container {
+		width: $popup-width;
+		.audio {
+			display: none;
+		}
+	}
 }
