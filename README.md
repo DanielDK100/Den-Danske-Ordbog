@@ -3,7 +3,7 @@ Foretag hurtige opslag i ordnets Den Danske Ordbog. Opslag i ordbogen kan foreta
 
 Alternativt kan et opslag ligeledes også udføres ved at markere et givent ord i browseren og dernæst højreklikke på ordet og slå ordet op derigennem. 
 
-Ydermere kan udvidelsen åbnes ved at trykke **Ctrl + Shift + U**.
+Ydermere kan udvidelsen åbnes ved at trykke `Ctrl + Shift + U`.
 
 Denne udvidelse har ingen tilknytning til [ordnet.dk](http://ordnet.dk/ddo).
 
