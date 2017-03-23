@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Den Danske Ordbog",
   "offline_enabled": false,
-  "version": "2.1.9",
+  "version": "2.1.10",
   "description": "Foretag hurtige opslag i ordnets Den Danske Ordbog.",
   "commands": {
     "_execute_browser_action": {

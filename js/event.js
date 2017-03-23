@@ -83,6 +83,7 @@ function knapHandler(info, tab) {
 		}
 	}).always(function(){
 		_gaq.push(['_trackEvent', 'Søgning', 'Event', info]);
+		opt.items = opt.items.filter((items, index, self) => self.findIndex((i) => {return i.title === items.title; }) === index);
 		chrome.notifications.create(info, opt);
 	});
 }
