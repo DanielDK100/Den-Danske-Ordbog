@@ -8,4 +8,4 @@ Ydermere kan udvidelsen åbnes ved at trykke **Ctrl + Shift + U**.
 Denne udvidelse har ingen tilknytning til [ordnet.dk](http://ordnet.dk/ddo).
 
 # Installation
-[Chrome Webshop - Den Danske Ordbog](https://chrome.google.com/webstore/detail/dbpdoikeilkcgfhlihaajhlkiflfhopc) - alternativt klon dette repository og indlæs udvidelsen manuelt under `chrome://extensions/`.
+[Chrome Webshop - Den Danske Ordbog](https://chrome.google.com/webstore/detail/dbpdoikeilkcgfhlihaajhlkiflfhopc).
