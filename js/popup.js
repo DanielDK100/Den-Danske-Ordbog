@@ -1,7 +1,8 @@
 var ordbog = angular.module('ordbog', ['ngSanitize']);
 ordbog.controller('OrdController', function($scope) {
     $scope.initialiser = function() {
-        console.log('Udviklet i AngularJS v' + angular.version.full);
+        console.log(chrome.i18n.getMessage("popupUdvikling") + ' AngularJS v' + angular.version.full);
+        $scope.placeholder = chrome.i18n.getMessage("popupPlaceholder");
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
             'background': 'url("' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box'
@@ -17,7 +18,7 @@ ordbog.controller('OrdController', function($scope) {
             var html = $(html).filter('.ar')[0];
 
             $scope.$apply(function() {
-                $scope.html = $(html).html() ? $(html).html() : '<h3>Ingen resultater med \"' + soegetekst + '\"</h3>';
+                $scope.html = $(html).html() ? $(html).html() : '<h3>' + chrome.i18n.getMessage("extIngenResultater") + ' \"' + soegetekst + '\"</h3>';
             });
         });
     }

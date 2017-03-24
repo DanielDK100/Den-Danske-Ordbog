@@ -1,0 +1,38 @@
+{
+	"extName": {
+		"message": "Den Danske Ordbog"
+	},
+	"extDescription": {
+		"message": "Foretag hurtige opslag i ordnets Den Danske Ordbog."
+	},
+	"popupUdvikling": {
+		"message": "Udviklet i"
+	},
+	"popupPlaceholder": {
+		"message": "Indtast søgetekst..."
+	},
+	"extIngenResultater": {
+		"message": "Ingen resultater med"
+	},
+	"eventSlaaOp": {
+		"message": "Slå \"%s\" op i ordbogen"
+	},
+	"eventSynonymerKnap": {
+		"message": "Søg efter synonymer"
+	},
+	"eventAntonymerKnap": {
+		"message": "Søg efter antonymer"
+	},
+	"eventSynonymer": {
+		"message": "Synonymer for"
+	},
+	"eventAntonymer": {
+		"message": "Antonymer for"
+	},
+	"eventIngenSynonymer": {
+		"message": "Ingen synonymer blev fundet"
+	},
+	"eventIngenAntonymer": {
+		"message": "Ingen antonymer blev fundet"
+	}
+}

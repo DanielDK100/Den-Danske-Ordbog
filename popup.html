@@ -14,12 +14,14 @@
 	<main data-ng-init="initialiser()" class="container">
 		<header class="row col-md-12 form-group">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="Indtast søgetekst..." class="form-control" id="soegetekst" autofocus>
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control" id="soegetekst" autofocus>
 		</header>
 		<section data-ng-bind-html="html" class="row col-md-12"></section>
 		<footer data-ng-if="html" class="row col-md-12">
 			<hr>
+			<small class="pull-right">v<em data-ng-bind="manifest.version"></em></small>
 		</footer>
+		<div>lalal</div>
 	</main>
 	<script src="js/analyticstracking.min.js"></script>
 	<script src="js/jquery.min.js"></script>

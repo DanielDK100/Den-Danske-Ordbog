@@ -1,9 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "Den Danske Ordbog",
+  "name": "__MSG_extName__",
+  "version": "2.2.9",
+  "description": "__MSG_extDescription__",
+  "default_locale": "da",
+  "author": "Daniel Winther",
   "offline_enabled": false,
-  "version": "2.1.10",
-  "description": "Foretag hurtige opslag i ordnets Den Danske Ordbog.",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": ["js/analyticstracking.min.js", "js/jquery.min.js", "js/event.js"]
+  },
+  "icons": {
+    "128": "img/ikon128.png"
+  },
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
@@ -14,16 +26,6 @@
         "linux": "Ctrl + Shift + U"
       }
     }
-  },
-  "icons": {
-    "128": "img/ikon128.png"
-  },
-  "background": {
-    "persistent": false,
-    "scripts": ["js/analyticstracking.min.js", "js/jquery.min.js", "js/event.js"]
-  },
-  "browser_action": {
-    "default_popup": "popup.html"
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "permissions": [

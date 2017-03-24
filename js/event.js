@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(function() {
 	chrome.contextMenus.create({
-		title: 'Slå \"%s\" op i ordbogen', 
+		title: chrome.i18n.getMessage("eventSlaaOp"), 
 		contexts: ['selection'],
 		id: 'context' + 'selection',
 	});
@@ -19,7 +19,7 @@ function klikHandler(info, tab) {
 				message: '',
 				contextMessage: '',
 				iconUrl: manifest.icons['128'],
-				buttons: [{title: 'Søg efter synonymer'}, {title: 'Søg efter antonymer'}],
+				buttons: [{title: chrome.i18n.getMessage("eventSynonymerKnap")}, {title: chrome.i18n.getMessage("eventAntonymerKnap")}],
 			}
 			$.get('http://ws.dsl.dk/ddo/query', {q: nytOrd})
 			.done(function(html) {
@@ -29,7 +29,7 @@ function klikHandler(info, tab) {
 				if (!title) {
 					opt.buttons = [];
 				}
-				opt.title = title ? title.trim().replace(/\d+/g, '') : 'Ingen resultater med \"' + nytOrd + '\"';
+				opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage("extIngenResultater") + ' \"' + nytOrd + '\"';
 				opt.message = $(html).find('.dtrn').first().text().trim();
 				opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
 			}).always(function(){
@@ -57,11 +57,11 @@ function knapHandler(info, tab) {
 		switch(tab) {
 			case 0:
 			_gaq.push(['_trackEvent', 'Søgning', 'Event - synonym', info]);
-			opt.title = $(html).find('.head .k').first().text() ? 'Synonymer for \"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : 'Ingen synonymer for \"' + info + '\"';
+			opt.title = $(html).find('.head .k').first().text() ? chrome.i18n.getMessage("eventSynonymer") + ' \"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : chrome.i18n.getMessage("extIngenResultater") + ' \"' + info + '\"';
 			var synonymer = $(html).find('.synonym .k');
 
 			if (!synonymer.length) {
-				opt.items.push({title: 'Ingen synonymer blev fundet', message: ''});
+				opt.items.push({title: chrome.i18n.getMessage("eventIngenSynonymer"), message: ''});
 			}
 			$.each(synonymer, function(key, synonym) {
 				opt.items.push({title: $(synonym).text().trim().capitalize(), message: ''});
@@ -70,11 +70,11 @@ function knapHandler(info, tab) {
 
 			case 1:
 			_gaq.push(['_trackEvent', 'Søgning', 'Event - antonym', info]);
-			opt.title = $(html).find('.head .k').first().text() ? 'Antonymer for \"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : 'Ingen antonymer for \"' + info + '\"';
+			opt.title = $(html).find('.head .k').first().text() ? chrome.i18n.getMessage("eventAntonymer") + '\"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : chrome.i18n.getMessage("extIngenResultater") +' \"' + info + '\"';
 			var antonymer = $(html).find('.antonym .k');
 
 			if (!antonymer.length) {
-				opt.items.push({title: 'Ingen antonymer blev fundet', message: ''});
+				opt.items.push({title: chrome.i18n.getMessage("eventIngenAntonymer"), message: ''});
 			}
 			$.each(antonymer, function(key, antonym) {
 				opt.items.push({title: $(antonym).text().trim().capitalize(), message: ''});
