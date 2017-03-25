@@ -7,11 +7,11 @@
   "author": "Daniel Winther",
   "offline_enabled": false,
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "views/popup.html"
   },
   "background": {
     "persistent": false,
-    "scripts": ["js/analyticstracking.min.js", "js/jquery.min.js", "js/event.js"]
+    "scripts": ["js/analyticstracking.min.js", "js/jquery.min.js", "js/konfiguration.js", "js/event.js"]
   },
   "icons": {
     "128": "img/ikon128.png"

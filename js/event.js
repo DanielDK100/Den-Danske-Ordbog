@@ -21,7 +21,7 @@ function klikHandler(info, tab) {
 				iconUrl: manifest.icons['128'],
 				buttons: [{title: chrome.i18n.getMessage("eventSynonymerKnap")}, {title: chrome.i18n.getMessage("eventAntonymerKnap")}],
 			}
-			$.get('http://ws.dsl.dk/ddo/query', {q: nytOrd})
+			$.get(konfiguration.urlWs, {q: nytOrd})
 			.done(function(html) {
 				var html = $(html).filter('.ar')[0];
 				var title = $(html).find('.head .k').first().text();
@@ -50,7 +50,7 @@ function knapHandler(info, tab) {
 		items: [],
 	}
 
-	$.get('http://ws.dsl.dk/ddo/query', {q: info})
+	$.get(konfiguration.urlWs, {q: info})
 	.done(function(html) {
 		var html = $(html).filter('.ar')[0];
 
@@ -88,7 +88,7 @@ function knapHandler(info, tab) {
 	});
 }
 chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
-	chrome.tabs.create({url: 'http://ordnet.dk/ddo/ordbog?query=' + nytOrd}, function tab() {
+	chrome.tabs.create({url: konfiguration.urlDenDanskeOrdbog + nytOrd}, function tab() {
 		_gaq.push(['_trackEvent', 'Søgning', 'Event - link', nytOrd]);
 		chrome.notifications.clear(nytOrd);
 	});
