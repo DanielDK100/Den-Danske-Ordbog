@@ -1,7 +1,7 @@
 var ordbog = angular.module('ordbog', ['ngSanitize']);
 ordbog.controller('OrdController', function($scope) {
     $scope.initialiser = function() {
-        console.log(chrome.i18n.getMessage("popupUdvikling") + ' AngularJS v' + angular.version.full);
+        console.log(chrome.i18n.getMessage("popupUdvikling") + ' AngularJS ' + angular.version.full);
         $scope.placeholder = chrome.i18n.getMessage("popupPlaceholder");
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
