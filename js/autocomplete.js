@@ -9,9 +9,11 @@ $(soegetekst).keyup(function(event) {
         },
         open: function(event, ui) {
             $('.container').css('minHeight', $('.ui-autocomplete').height() + 105);
+            $('html').css('height', 0);
         },
         close: function(event, ui) {
             $('.container').css('minHeight', 0);
+            $('html').css('height', 0);
         }
     });
     });

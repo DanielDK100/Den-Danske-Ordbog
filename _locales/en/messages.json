@@ -34,5 +34,8 @@
 	},
 	"eventIngenAntonymer": {
 		"message": "No antonyms were found"
+	},
+	"eventVisOrdforslag": {
+		"message": "Show more word suggestions"
 	}
 }

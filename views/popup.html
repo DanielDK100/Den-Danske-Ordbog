@@ -12,6 +12,9 @@
 </head>
 <body>
 	<main data-ng-init="initialiser()" class="container">
+		<div class="row col-md-12">
+			<div data-ng-if="sprog != 'en'" id="google_translate_element" class="pull-right"></div>
+		</div>
 		<header class="row col-md-12 form-group">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
 			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control" id="soegetekst" autofocus>
@@ -22,14 +25,15 @@
 			<small class="pull-right"><em data-ng-bind="manifest.version"></em></small>
 		</footer>
 	</main>
+	<script src="../js/konfiguration.js"></script>
 	<script src="../js/analyticstracking.min.js"></script>
+	<script src="../js/element.js?cb=googleTranslateElementInit"></script>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery-ui.min.js"></script>
 	<script src="../js/autocomplete.js"></script>
 	<script src="../js/angular.min.js"></script>
 	<script src="../js/angular-sanitize.min.js"></script>
-	<script src="../js/konfiguration.js"></script>
 	<script src="../controllers/ordbogController.js"></script>
 </body>
 </html>

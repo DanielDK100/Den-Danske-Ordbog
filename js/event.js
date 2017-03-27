@@ -1,3 +1,5 @@
+var manifest = chrome.runtime.getManifest();
+
 chrome.runtime.onInstalled.addListener(function() {
 	chrome.contextMenus.create({
 		title: chrome.i18n.getMessage("eventSlaaOp"), 
@@ -6,20 +8,17 @@ chrome.runtime.onInstalled.addListener(function() {
 	});
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
-chrome.notifications.onButtonClicked.addListener(knapHandler);
 function klikHandler(info, tab) {
-	var manifest = chrome.runtime.getManifest();
 	var antalOrd = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
-	$.map((soegetekst).split(' '), function(nytOrd) {
-		if (antalOrd < 5) {
+	$.each((soegetekst).split(' '), function(key, nytOrd) {
+		if (antalOrd <= 4) {
 			var opt = {
 				type: 'basic',
 				title: '',
 				message: '',
 				contextMessage: '',
 				iconUrl: manifest.icons['128'],
-				buttons: [{title: chrome.i18n.getMessage("eventSynonymerKnap")}, {title: chrome.i18n.getMessage("eventAntonymerKnap")}],
 			}
 			$.get(konfiguration.urlWs, {q: nytOrd})
 			.done(function(html) {
@@ -27,7 +26,12 @@ function klikHandler(info, tab) {
 				var title = $(html).find('.head .k').first().text();
 
 				if (!title) {
-					opt.buttons = [];
+					opt.buttons = [{title: chrome.i18n.getMessage("eventVisOrdforslag") }];
+					chrome.notifications.onButtonClicked.addListener(visForslag);
+				}
+				else {
+					opt.buttons = [{title: chrome.i18n.getMessage("eventSynonymerKnap")}, {title: chrome.i18n.getMessage("eventAntonymerKnap")}];
+					chrome.notifications.onButtonClicked.addListener(synonymAntonym);
 				}
 				opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage("extIngenResultater") + ' \"' + nytOrd + '\"';
 				opt.message = $(html).find('.dtrn').first().text().trim();
@@ -40,8 +44,7 @@ function klikHandler(info, tab) {
 		antalOrd++;
 	})
 };
-function knapHandler(info, tab) {
-	var manifest = chrome.runtime.getManifest();
+function synonymAntonym(info, tab) {
 	var opt = {
 		type: 'list',
 		title: '',
@@ -85,6 +88,40 @@ function knapHandler(info, tab) {
 		_gaq.push(['_trackEvent', 'Søgning', 'Event', info]);
 		opt.items = opt.items.filter((items, index, self) => self.findIndex((i) => {return i.title === items.title; }) === index);
 		chrome.notifications.create(info, opt);
+	});
+}
+function visForslag(info, tab) {
+	chrome.notifications.clear(info);
+	var antalOrd = 0;
+
+	$.get(konfiguration.urlWs, {q: info})
+	.done(function(ingenMatch) {
+		var ingenMatch = $(ingenMatch).filter('.nomatch')[0];
+		$.each($(ingenMatch).find('ul li'), function(key, nytOrd) {
+			if (antalOrd <= 4) {
+				nytOrd = $(nytOrd).text();
+				var opt = {
+					type: 'basic',
+					title: '',
+					message: '',
+					contextMessage: '',
+					iconUrl: manifest.icons['128'],
+				}
+				$.get(konfiguration.urlWs, {q: nytOrd})
+				.done(function(html) {
+					var html = $(html).filter('.ar')[0];
+					var title = $(html).find('.head .k').first().text();
+
+					opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage("extIngenResultater") + ' \"' + nytOrd + '\"';
+					opt.message = $(html).find('.dtrn').first().text().trim();
+					opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
+				}).always(function(){
+					_gaq.push(['_trackEvent', 'Søgning', 'Event - vis ordforslag', nytOrd]);
+					chrome.notifications.create(nytOrd, opt);
+				});
+			}
+			antalOrd++;
+		});
 	});
 }
 chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {

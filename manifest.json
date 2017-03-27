@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "2.2.10",
+  "version": "2.3.10",
   "description": "__MSG_extDescription__",
-  "default_locale": "da",
+  "default_locale": "en",
   "author": "Daniel Winther",
   "offline_enabled": false,
   "browser_action": {
@@ -11,7 +11,7 @@
   },
   "background": {
     "persistent": false,
-    "scripts": ["js/analyticstracking.min.js", "js/jquery.min.js", "js/konfiguration.js", "js/event.js"]
+    "scripts": ["js/konfiguration.js", "js/analyticstracking.min.js", "js/jquery.min.js", "js/event.js"]
   },
   "icons": {
     "128": "img/ikon128.png"
@@ -27,7 +27,7 @@
       }
     }
   },
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://translate.googleapis.com 'unsafe-eval'; object-src 'self'",
   "permissions": [
     "activeTab",
     "notifications",
