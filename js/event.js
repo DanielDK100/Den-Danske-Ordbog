@@ -104,14 +104,12 @@ function visForslag(info, tab) {
 					message: '',
 					contextMessage: '',
 					iconUrl: manifest.icons['128'],
-					//buttons: [{title: chrome.i18n.getMessage("eventSynonymerKnap")}, {title: chrome.i18n.getMessage("eventAntonymerKnap")}]
 				}
 				$.get(konfiguration.urlWs, {q: nytOrd})
 				.done(function(html) {
 					var html = $(html).filter('.ar')[0];
 					var title = $(html).find('.head .k').first().text();
 
-					//chrome.notifications.onButtonClicked.addListener(synonymAntonym);
 					opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage("extIngenResultater") + ' \"' + nytOrd + '\"';
 					opt.message = $(html).find('.dtrn').first().text().trim();
 					opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
