@@ -1,5 +1,4 @@
 var manifest = chrome.runtime.getManifest();
-
 chrome.runtime.onInstalled.addListener(function() {
 	chrome.contextMenus.create({
 		title: chrome.i18n.getMessage("eventSlaaOp"), 
@@ -52,11 +51,9 @@ function synonymAntonym(info, tab) {
 		iconUrl: manifest.icons['128'],
 		items: [],
 	}
-
 	$.get(konfiguration.urlWs, {q: info})
 	.done(function(html) {
 		var html = $(html).filter('.ar')[0];
-
 		switch(tab) {
 			case 0:
 			_gaq.push(['_trackEvent', 'Søgning', 'Event - synonym', info]);
@@ -93,7 +90,6 @@ function synonymAntonym(info, tab) {
 function visForslag(info, tab) {
 	chrome.notifications.clear(info);
 	var antalOrd = 0;
-
 	$.get(konfiguration.urlWs, {q: info})
 	.done(function(ingenMatch) {
 		var ingenMatch = $(ingenMatch).filter('.nomatch')[0];
