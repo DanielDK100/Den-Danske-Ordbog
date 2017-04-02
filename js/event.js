@@ -114,7 +114,7 @@ function visForslag(info, tab) {
 					opt.message = $(html).find('.dtrn').first().text().trim();
 					opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
 				}).always(function(){
-					_gaq.push(['_trackEvent', 'Søgning', 'Event - vis ordforslag', nytOrd]);
+					_gaq.push(['_trackEvent', 'Søgning', 'Event - ordforslag', nytOrd]);
 					chrome.notifications.create(nytOrd, opt);
 				});
 			}
