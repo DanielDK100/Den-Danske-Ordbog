@@ -17,9 +17,9 @@ ordbog.controller('OrdbogController', function($scope) {
         soeg($scope.soegetekst);
     };
     function soeg(soegetekst) {
-        if (soegetekst != '') {
-            $scope.indlaes = true;
+        if (soegetekst !== '') {
             $scope.ordbog = false;
+            $scope.indlaes = true;
             $.get(konfiguration.urlWs, {q: soegetekst})
             .then(function(html) {
                 _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
@@ -31,6 +31,9 @@ ordbog.controller('OrdbogController', function($scope) {
                     $scope.ordbog = true;
                 });
             });
+        }
+        else {
+            $scope.html = null;
         }
     }
 });
