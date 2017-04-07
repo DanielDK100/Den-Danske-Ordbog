@@ -1,8 +1,31 @@
 $popup-width: 350px;
-
 body {
 	.container {
 		width: $popup-width;
+		position: relative;
+		.indlaes {
+			transition: 0.1s linear all;  
+			opacity: 1;
+		}
+		.indlaes.ng-hide {
+			transition: 0.5s linear all;  
+			opacity: 0;
+		}
+		.ordbog {
+			word-wrap: break-word;
+			transition: 0.5s linear all;  
+			opacity: 1;
+		}
+		.ordbog.ng-hide {
+			transition: 0.5s linear all;  
+			opacity: 0;
+		}
+		#indlaes {
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%, 0);
+			z-index: 1;
+		}
 		.audio {
 			display: none;
 		}

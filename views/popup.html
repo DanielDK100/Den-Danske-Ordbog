@@ -10,19 +10,20 @@
 	<link rel="stylesheet" href="../css/style.min.css">
 	<title data-ng-bind="manifest.name"></title>
 </head>
-<body>
+<body>	
 	<main data-ng-init="initialiser()" class="container">
-		<div class="row col-md-12">
-			<div data-ng-if="sprog != 'da'" id="google_translate_element" class="pull-right"></div>
+		<div data-ng-if="sprog != 'da'" class="row col-md-12">
+			<div id="google_translate_element" class="pull-right"></div>
 		</div>
 		<header class="row col-md-12 form-group">
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control" id="soegetekst" autofocus>
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control notranslate" id="soegetekst" autofocus>
 		</header>
-		<section data-ng-bind-html="html" class="row col-md-12"></section>
+		<img data-ng-show="indlaes" class="indlaes ng-hide" id="indlaes" src="../img/indlaeser.svg" alt="Indlæser...">
+		<section data-ng-show="ordbog" data-ng-bind-html="html" class="row col-md-12 ordbog ng-hide"></section>
 		<footer data-ng-if="html" class="row col-md-12">
 			<hr>
-			<small class="pull-right"><em data-ng-bind="manifest.version"></em></small>
+			<small class="text-muted pull-right"><em data-ng-bind="manifest.version"></em></small>
 		</footer>
 	</main>
 	<script src="../js/konfiguration.js"></script>
@@ -33,6 +34,7 @@
 	<script src="../js/jquery-ui.min.js"></script>
 	<script src="../js/autocomplete.js"></script>
 	<script src="../js/angular.min.js"></script>
+	<script src="../js/angular-animate.min.js"></script>
 	<script src="../js/angular-sanitize.min.js"></script>
 	<script src="../controllers/ordbogController.js"></script>
 </body>
