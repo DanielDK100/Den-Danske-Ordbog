@@ -11,6 +11,9 @@
 	"popupPlaceholder": {
 		"message": "Indtast søgetekst..."
 	},
+	"popupIndlaeser": {
+		"message": "Indlæser..."
+	},
 	"extIngenResultater": {
 		"message": "Ingen resultater med"
 	},

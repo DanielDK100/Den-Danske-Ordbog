@@ -19,16 +19,16 @@
 			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
 			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control notranslate" id="soegetekst" autofocus>
 		</header>
-		<img data-ng-show="indlaes" class="indlaes ng-hide" id="indlaes" src="../img/indlaeser.svg" alt="Indlæser...">
+		<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" class="indlaes ng-hide" id="indlaes">
 		<section data-ng-show="ordbog" data-ng-bind-html="html" class="row col-md-12 ordbog ng-hide"></section>
 		<footer data-ng-if="html" class="row col-md-12">
 			<hr>
-			<small class="text-muted pull-right"><em data-ng-bind="manifest.version"></em></small>
+			<small class="pull-right"><em data-ng-bind="manifest.version" class="text-muted notranslate"></em></small>
 		</footer>
 	</main>
 	<script src="../js/konfiguration.js"></script>
 	<script src="../js/analyticstracking.min.js"></script>
-	<script src="../js/element.js?cb=googleTranslateElementInit"></script>
+	<script src="../js/element.min.js?cb=googleTranslateElementInit"></script>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery-ui.min.js"></script>

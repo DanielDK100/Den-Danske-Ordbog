@@ -11,6 +11,9 @@
 	"popupPlaceholder": {
 		"message": "Enter search text..."
 	},
+	"popupIndlaeser": {
+		"message": "Loading..."
+	},
 	"extIngenResultater": {
 		"message": "No results for"
 	},

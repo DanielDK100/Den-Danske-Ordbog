@@ -8,6 +8,7 @@ ordbog.controller('OrdbogController', function($scope) {
         $scope.indlaes = false;
         $scope.sprog = chrome.i18n.getMessage('@@ui_locale');
         $scope.placeholder = chrome.i18n.getMessage('popupPlaceholder');
+        $scope.indlaeser = chrome.i18n.getMessage('popupIndlaeser');
         $scope.manifest = chrome.runtime.getManifest();
         $scope.background = {
             'background': 'url("../' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box'
