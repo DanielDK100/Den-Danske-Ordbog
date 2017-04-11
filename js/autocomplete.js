@@ -9,7 +9,7 @@ soegetekst.keyup(function(event) {
             'ui-autocomplete': 'notranslate'
         },
         select: function(event, ui) {
-            soegetekst.val(ui.item.value).blur();
+            soegetekst.val(ui.item.value).trigger('input').blur();
         },
         open: function(event, ui) {
             $('.container').css('minHeight', $('.ui-autocomplete').height() + 105);

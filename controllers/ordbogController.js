@@ -26,15 +26,16 @@ ordbog.controller('OrdbogController', function($scope) {
                 _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
                 var html = $(html).filter('.ar')[0];
 
-                $scope.$apply(function() {
-                    $scope.html = $(html).html() ? $(html).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
-                    $scope.indlaes = false;
-                    $scope.ordbog = true;
-                });
+                $scope.html = $(html).html() ? $(html).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
+                $scope.indlaes = false;
+                $scope.ordbog = true;
+
+                $scope.$apply();
             });
         }
         else {
             $scope.html = null;
+            $scope.soegetekst = null;
         }
     }
 });
