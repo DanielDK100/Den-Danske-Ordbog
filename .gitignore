@@ -1,4 +1,4 @@
 js/konfiguration.js
-js/ordbogController.js
+controllers/ordbogController.js
 js/autocomplete.js
 js/event.js
