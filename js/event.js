@@ -37,14 +37,14 @@ function klikHandler(info, tab) {
 				opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
 				opt.message = $(html).find('.dtrn').first().text().trim();
 				opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
-			}).always(function(){
+			}).always(function() {
 				_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
 				chrome.notifications.create(nytOrd, opt);
 			});
 		}
 		antalOrd++;
 	})
-};
+}
 function synonymAntonym(info, tab) {
 	var opt = {
 		type: 'list',
@@ -81,11 +81,11 @@ function synonymAntonym(info, tab) {
 			$.each(antonymer, function(key, antonym) {
 				opt.items.push({title: $(antonym).text().trim().capitalize(), message: ''});
 			});
-			break
+			break;
 		}
-	}).always(function(){
+	}).always(function() {
 		_gaq.push(['_trackEvent', 'Søgning', 'Event', info]);
-		opt.items = opt.items.filter((items, index, self) => self.findIndex((i) => {return i.title === items.title; }) === index);
+		opt.items = fjernDuplikationer(opt.items);
 		chrome.notifications.create(info, opt);
 	});
 }
@@ -113,7 +113,7 @@ function visForslag(info, tab) {
 					opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
 					opt.message = $(html).find('.dtrn').first().text().trim();
 					opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
-				}).always(function(){
+				}).always(function() {
 					_gaq.push(['_trackEvent', 'Søgning', 'Event - ordforslag', nytOrd]);
 					chrome.notifications.create(nytOrd, opt);
 				});
@@ -130,4 +130,17 @@ chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 })
 String.prototype.capitalize = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+function fjernDuplikationer(objekter) {
+	var brugteObjekter = {};
+	for (var i=objekter.length - 1;i>=0;i--) {
+		var so = JSON.stringify(objekter[i]);
+		if (brugteObjekter[so]) {
+			objekter.splice(i, 1);
+
+		} else {
+			brugteObjekter[so] = true;          
+		}
+	}
+	return objekter;
 }
