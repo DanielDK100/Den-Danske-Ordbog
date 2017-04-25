@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "2.4.11",
+  "short_name": "__MSG_extShortName__",
+  "version": "2.4.12",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "author": "Daniel Winther",

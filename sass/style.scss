@@ -1,7 +1,10 @@
-$popup-width: 350px;
 body {
+	::selection {
+		color: white;
+		background: #598AA3;
+	}
 	.container {
-		width: $popup-width;
+		width: 350px;
 		position: relative;
 		.indlaes {
 			transition: 0.1s linear all;  

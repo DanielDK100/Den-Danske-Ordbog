@@ -2,6 +2,9 @@
 	"extName": {
 		"message": "Den Danske Ordbog"
 	},
+	"extShortName": {
+		"message": "DDO"
+	},
 	"extDescription": {
 		"message": "Foretag hurtige opslag i ordnets Den Danske Ordbog."
 	},

@@ -133,7 +133,7 @@ String.prototype.capitalize = function() {
 }
 function fjernDuplikationer(objekter) {
 	var brugteObjekter = {};
-	for (var i=objekter.length - 1;i>=0;i--) {
+	for (var i = objekter.length - 1; i >= 0; i--) {
 		var so = JSON.stringify(objekter[i]);
 		if (brugteObjekter[so]) {
 			objekter.splice(i, 1);

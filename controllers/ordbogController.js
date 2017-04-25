@@ -1,7 +1,3 @@
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
-}
-
 angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
 .controller('OrdbogController', ['$scope', function($scope) {
   $scope.initialiser = function() {
@@ -23,20 +19,24 @@ function soeg(soegetekst) {
         $scope.ordbog = false;
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
-        .then(function(html) {
+        .done(function(html) {
             _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
             var html = $(html).filter('.ar')[0];
 
             $scope.html = $(html).html() ? $(html).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
             $scope.indlaes = false;
-            $scope.ordbog = true;
-
-            $scope.$apply();
+            $scope.ordbog = true; 
+        }).always(function() {
+            $scope.$apply();   
         });
     }
     else {
         $scope.html = null;
-        $scope.soegetekst = null;
     }
 }
 }])
+function googleTranslateElementInit() {
+    if (chrome.i18n.getMessage('@@ui_locale') != 'da') {
+        new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
+    }
+}

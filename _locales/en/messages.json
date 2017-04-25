@@ -2,6 +2,9 @@
 	"extName": {
 		"message": "The Danish Dictionary"
 	},
+	"extShortName": {
+		"message": "TDD"
+	},
 	"extDescription": {
 		"message": "Make quick lookups in ordnet's The Danish Dictionary."
 	},
