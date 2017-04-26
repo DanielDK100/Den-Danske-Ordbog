@@ -4,7 +4,7 @@
   "short_name": "__MSG_extShortName__",
   "version": "2.4.12",
   "description": "__MSG_extDescription__",
-  "default_locale": "en",
+  "default_locale": "da",
   "author": "Daniel Winther",
   "offline_enabled": false,
   "browser_action": {

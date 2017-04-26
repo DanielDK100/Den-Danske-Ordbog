@@ -1,4 +1,5 @@
 var soegetekst = $('#soegetekst');
+$('html').css('height', 0);
 soegetekst.keyup(function(event) {
     $('html').css('height', 0);
     $.getJSON(konfiguration.urlAutocomplete, {text: soegetekst.val(), size: 10}, function(response) {
