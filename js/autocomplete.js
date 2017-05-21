@@ -1,6 +1,7 @@
 var soegetekst = $('#soegetekst');
 $('html').css('height', 0);
-soegetekst.keyup(function(event) {
+
+soegetekst.on('input', function() {
     $('html').css('height', 0);
     $.getJSON(konfiguration.urlAutocomplete, {text: soegetekst.val(), size: 10}, function(response) {
         soegetekst.autocomplete({
@@ -13,7 +14,7 @@ soegetekst.keyup(function(event) {
             soegetekst.val(ui.item.value).trigger('input').blur();
         },
         open: function(event, ui) {
-            $('.container').css('minHeight', $('.ui-autocomplete').height() + 105);
+            $('.container').css('minHeight', $('.ui-autocomplete').height() + $('#soegehjaelp').height() + 105);
         },
         close: function(event, ui) {
             $('.container').css('minHeight', 0);

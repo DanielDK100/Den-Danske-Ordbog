@@ -11,6 +11,15 @@
 	"popupUdvikling": {
 		"message": "Udviklet i"
 	},
+	"popupSoegehjaelp": {
+		"message": "Søgehjælp"
+	},
+	"popupSoegehjaelpBegynder": {
+		"message": "Ord der begynder med: ord*"
+	},
+	"popupSoegehjaelpEnder": {
+		"message": "Ord der ender med: *ord"
+	},
 	"popupPlaceholder": {
 		"message": "Indtast søgetekst..."
 	},

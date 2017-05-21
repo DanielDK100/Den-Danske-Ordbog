@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html data-ng-app="Ordbog" data-ng-controller="OrdbogController">
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<meta name="description" ng-attr-content="{{manifest.description}}">
+	<meta name="author" ng-attr-content=="{{manifest.author}}">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="../css/jquery-ui.min.css">
@@ -16,10 +18,29 @@
 			<div id="google_translate_element" class="pull-right"></div>
 		</div>
 		<header class="row col-md-12 form-group">
-			<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" class="form-control notranslate" id="soegetekst" autofocus>
+			<div class="row col-md-12">
+				<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
+				<h6 data-ng-click="visSoegehjaelp = true" data-ng-hide="visSoegehjaelp" class="pull-right text-muted" role="button"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span></h6>
+			</div>
+			<div data-ng-show="visSoegehjaelp" id="soegehjaelp" class="row col-md-12">
+				<div class="well well-sm" role="alert">
+					<button data-ng-click="visSoegehjaelp = false" type="button" class="close" data-dismiss="alert" aria-label="Luk"><span aria-hidden="true">&times;</span></button>
+					<button data-ng-click="soegetekst = soegetekst + 'æ'" type="button" class="btn btn-default btn-xs">æ</button>
+					<button data-ng-click="soegetekst = soegetekst + 'ø'" type="button" class="btn btn-default btn-xs">ø</button>
+					<button data-ng-click="soegetekst = soegetekst + 'å'" type="button" class="btn btn-default btn-xs">å</button>
+					<button data-ng-click="soegetekst = soegetekst + 'á'" type="button" class="btn btn-default btn-xs">á</button>
+					<button data-ng-click="soegetekst = soegetekst + 'é'" type="button" class="btn btn-default btn-xs">é</button>
+					<button data-ng-click="soegetekst = soegetekst + 'è'" type="button" class="btn btn-default btn-xs">è</button>
+					<button data-ng-click="soegetekst = soegetekst + 'ü'" type="button" class="btn btn-default btn-xs">ü</button>
+					<h4 data-ng-bind="soegehjaelp"></h4>
+					<span data-ng-bind="soegehjaelpBegynder"></span><br>
+					<span data-ng-bind="soegehjaelpEnder"></span>
+				</div>
+			</div>
+			<input data-ng-model="soegetekst" data-ng-change="vedAendring()" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" id="soegetekst" class="form-control notranslate" autofocus>
 		</header>
-		<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" class="indlaes ng-hide" id="indlaes">
+		<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide">
+		<section data-ng-bind-html="ordforslag"></section>
 		<section data-ng-show="ordbog" data-ng-bind-html="html" class="row col-md-12 ordbog ng-hide"></section>
 		<footer data-ng-if="html" class="row col-md-12">
 			<hr>

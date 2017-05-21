@@ -11,6 +11,15 @@
 	"popupUdvikling": {
 		"message": "Developed in"
 	},
+	"popupSoegehjaelp": {
+		"message": "Search help"
+	},
+	"popupSoegehjaelpBegynder": {
+		"message": "Words that begin with: word*"
+	},
+	"popupSoegehjaelpEnder": {
+		"message": "Words that end with: *word"
+	},
 	"popupPlaceholder": {
 		"message": "Enter search text..."
 	},
