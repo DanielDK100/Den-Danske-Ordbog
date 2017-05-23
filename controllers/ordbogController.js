@@ -49,6 +49,7 @@ function soeg(soegetekst) {
         });
     }
     else {
+        $scope.ordforslag = null;
         $scope.opslag = null;
     }
 }
