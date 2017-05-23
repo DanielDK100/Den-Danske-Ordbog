@@ -23,6 +23,9 @@
 	"popupPlaceholder": {
 		"message": "Enter search text..."
 	},
+	"popupMenteDu": {
+		"message": "Did you mean:"
+	},
 	"popupIndlaeser": {
 		"message": "Loading..."
 	},

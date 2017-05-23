@@ -23,6 +23,9 @@
 	"popupPlaceholder": {
 		"message": "Indtast søgetekst..."
 	},
+	"popupMenteDu": {
+		"message": "Mente du:"
+	},
 	"popupIndlaeser": {
 		"message": "Indlæser..."
 	},

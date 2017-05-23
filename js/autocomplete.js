@@ -1,8 +1,5 @@
 var soegetekst = $('#soegetekst');
-$('html').css('height', 0);
-
 soegetekst.on('input', function() {
-    $('html').css('height', 0);
     $.getJSON(konfiguration.urlAutocomplete, {text: soegetekst.val(), size: 10}, function(response) {
         soegetekst.autocomplete({
           source: response,

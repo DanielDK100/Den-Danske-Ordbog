@@ -8,41 +8,40 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
 function klikHandler(info, tab) {
-	var antalOrd = 0;
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.each((soegetekst).split(' '), function(key, nytOrd) {
-		if (antalOrd <= 4) {
-			var opt = {
-				type: 'basic',
-				title: '',
-				message: '',
-				contextMessage: '',
-				iconUrl: manifest.icons['128'],
-			}
-			$.get(konfiguration.urlWs, {q: nytOrd})
-			.done(function(html) {
-				var html = $(html).filter('.ar')[0];
-				var title = $(html).find('.head .k').first().text();
-
-				if (!title) {
-					opt.buttons = [{title: chrome.i18n.getMessage('eventVisOrdforslag') }];
-					chrome.notifications.onButtonClicked.removeListener(synonymAntonym);
-					chrome.notifications.onButtonClicked.addListener(visForslag);
-				}
-				else {
-					opt.buttons = [{title: chrome.i18n.getMessage('eventSynonymerKnap')}, {title: chrome.i18n.getMessage('eventAntonymerKnap')}];
-					chrome.notifications.onButtonClicked.addListener(synonymAntonym);
-					chrome.notifications.onButtonClicked.removeListener(visForslag);
-				}
-				opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
-				opt.message = $(html).find('.dtrn').first().text().trim();
-				opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
-			}).always(function() {
-				_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
-				chrome.notifications.create(nytOrd, opt);
-			});
+		if (key >= 4) {
+			return false;
 		}
-		antalOrd++;
+		var opt = {
+			type: 'basic',
+			title: '',
+			message: '',
+			contextMessage: '',
+			iconUrl: manifest.icons['128'],
+		}
+		$.get(konfiguration.urlWs, {q: nytOrd})
+		.done(function(html) {
+			var html = $(html).filter('.ar')[0];
+			var title = $(html).find('.head .k').first().text();
+
+			if (!title) {
+				opt.buttons = [{title: chrome.i18n.getMessage('eventVisOrdforslag') }];
+				chrome.notifications.onButtonClicked.removeListener(synonymAntonym);
+				chrome.notifications.onButtonClicked.addListener(visForslag);
+			}
+			else {
+				opt.buttons = [{title: chrome.i18n.getMessage('eventSynonymerKnap')}, {title: chrome.i18n.getMessage('eventAntonymerKnap')}];
+				chrome.notifications.onButtonClicked.addListener(synonymAntonym);
+				chrome.notifications.onButtonClicked.removeListener(visForslag);
+			}
+			opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
+			opt.message = $(html).find('.dtrn').first().text().trim();
+			opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
+		}).always(function() {
+			_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
+			chrome.notifications.create(nytOrd, opt);
+		});
 	})
 }
 function synonymAntonym(info, tab) {
