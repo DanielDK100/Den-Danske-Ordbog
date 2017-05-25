@@ -1,6 +1,7 @@
 angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
 .controller('OrdbogController', ['$scope', function($scope) {
   $scope.initialiser = function() {
+    ga('send', 'pageview', 'popup.html');
     console.log(chrome.i18n.getMessage('popupUdvikling') + ' AngularJS ' + angular.version.full);
     $scope.soegetekst = '';
     $scope.indlaes = false;
@@ -16,22 +17,17 @@ angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
         'background': 'url("../' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box'
     }
 };
-$scope.vedAendring = function(soegetekst, erBogstav) {
-    if (erBogstav) {
-        $scope.soegetekst += soegetekst;
-    }
-    else {
-        $scope.soegetekst = soegetekst;
-    }
-    soeg($scope.soegetekst);
+$scope.vedAendring = function(soegetekst, erBogstav, menteDu) {
+    erBogstav ? $scope.soegetekst += soegetekst : $scope.soegetekst = soegetekst
+    soeg($scope.soegetekst, menteDu);
 };
-function soeg(soegetekst) {
+function soeg(soegetekst, menteDu) {
     if (soegetekst !== '') {
         $scope.ordbog = false;
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
-            _gaq.push(['_trackEvent', 'Søgning', 'Popup', soegetekst]);
+            menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - mente du', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
             var opslag = $(html).filter('.ar')[0];
             var ordforslag = [];
             angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {

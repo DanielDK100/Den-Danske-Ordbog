@@ -8,6 +8,7 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
 function klikHandler(info, tab) {
+	ga('send', 'pageview', 'event.js');
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.each((soegetekst).split(' '), function(key, nytOrd) {
 		if (key >= 4) {
@@ -39,7 +40,7 @@ function klikHandler(info, tab) {
 			opt.message = $(html).find('.dtrn').first().text().trim();
 			opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
 		}).always(function() {
-			_gaq.push(['_trackEvent', 'Søgning', 'Event', nytOrd]);
+			ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event', eventLabel: nytOrd});
 			chrome.notifications.create(nytOrd, opt);
 		});
 	})
@@ -57,7 +58,7 @@ function synonymAntonym(info, tab) {
 		var html = $(html).filter('.ar')[0];
 		switch(tab) {
 			case 0:
-			_gaq.push(['_trackEvent', 'Søgning', 'Event - synonym', info]);
+			ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event - synonym', eventLabel: info});
 			opt.title = $(html).find('.head .k').first().text() ? chrome.i18n.getMessage('eventSynonymer') + ' \"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : chrome.i18n.getMessage('extIngenResultater') + ' \"' + info + '\"';
 			var synonymer = $(html).find('.synonym .k');
 
@@ -70,7 +71,7 @@ function synonymAntonym(info, tab) {
 			break;
 
 			case 1:
-			_gaq.push(['_trackEvent', 'Søgning', 'Event - antonym', info]);
+			ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event - antonym', eventLabel: info});
 			opt.title = $(html).find('.head .k').first().text() ? chrome.i18n.getMessage('eventAntonymer') + '\"' + $(html).find('.head .k').first().text().trim().replace(/\d+/g, '') + '\"' : chrome.i18n.getMessage('extIngenResultater') +' \"' + info + '\"';
 			var antonymer = $(html).find('.antonym .k');
 
@@ -83,47 +84,46 @@ function synonymAntonym(info, tab) {
 			break;
 		}
 	}).always(function() {
-		_gaq.push(['_trackEvent', 'Søgning', 'Event', info]);
+		ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event', eventLabel: info});
 		opt.items = fjernDuplikationer(opt.items);
 		chrome.notifications.create(info, opt);
 	});
 }
 function visForslag(info, tab) {
 	chrome.notifications.clear(info);
-	var antalOrd = 0;
 	$.get(konfiguration.urlWs, {q: info})
 	.done(function(ingenMatch) {
 		var ingenMatch = $(ingenMatch).filter('.nomatch')[0];
 		$.each($(ingenMatch).find('ul li'), function(key, nytOrd) {
-			if (antalOrd <= 4) {
-				nytOrd = $(nytOrd).text();
-				var opt = {
-					type: 'basic',
-					title: '',
-					message: '',
-					contextMessage: '',
-					iconUrl: manifest.icons['128'],
-				}
-				$.get(konfiguration.urlWs, {q: nytOrd})
-				.done(function(html) {
-					var html = $(html).filter('.ar')[0];
-					var title = $(html).find('.head .k').first().text();
-
-					opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
-					opt.message = $(html).find('.dtrn').first().text().trim();
-					opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
-				}).always(function() {
-					_gaq.push(['_trackEvent', 'Søgning', 'Event - ordforslag', nytOrd]);
-					chrome.notifications.create(nytOrd, opt);
-				});
+			if (key >= 4) {
+				return false;
 			}
-			antalOrd++;
+			nytOrd = $(nytOrd).text();
+			var opt = {
+				type: 'basic',
+				title: '',
+				message: '',
+				contextMessage: '',
+				iconUrl: manifest.icons['128'],
+			}
+			$.get(konfiguration.urlWs, {q: nytOrd})
+			.done(function(html) {
+				var html = $(html).filter('.ar')[0];
+				var title = $(html).find('.head .k').first().text();
+
+				opt.title = title ? title.trim().replace(/\d+/g, '') : chrome.i18n.getMessage('extIngenResultater') + ' \"' + nytOrd + '\"';
+				opt.message = $(html).find('.dtrn').first().text().trim();
+				opt.contextMessage = $(html).find('.m').first().text() ? $(html).find('.m').first().text().trim() : $(html).find('.pos').first().text().trim();
+			}).always(function() {
+				ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event - ordforslag', eventLabel: nytOrd});
+				chrome.notifications.create(nytOrd, opt);
+			});
 		});
 	});
 }
 chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 	chrome.tabs.create({url: konfiguration.urlDenDanskeOrdbog + nytOrd}, function tab() {
-		_gaq.push(['_trackEvent', 'Søgning', 'Event - link', nytOrd]);
+		ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Event - link', eventLabel: nytOrd});
 		chrome.notifications.clear(nytOrd);
 	});
 })

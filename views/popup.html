@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" ng-attr-content="{{manifest.description}}">
-	<meta name="author" ng-attr-content=="{{manifest.author}}">
+	<meta name="author" ng-attr-content="{{manifest.author}}">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="../css/jquery-ui.min.css">
@@ -14,52 +14,70 @@
 </head>
 <body>	
 	<main data-ng-init="initialiser()" class="container">
-		<div data-ng-if="sprog != 'da'" class="row col-md-12">
-			<div id="google_translate_element" class="pull-right"></div>
-		</div>
-		<header class="row col-md-12 form-group">
-			<div class="row col-md-12">
-				<h3 data-ng-bind="manifest.name" class="pull-left"></h3>
-				<h6 data-ng-click="visSoegehjaelp = true" data-ng-hide="visSoegehjaelp" class="pull-right text-muted" role="button"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span></h6>
-			</div>
-			<div data-ng-show="visSoegehjaelp" id="soegehjaelp" class="row col-md-12">
-				<div class="well well-sm" role="alert">
-					<button data-ng-click="visSoegehjaelp = false" type="button" class="close" data-dismiss="alert" aria-label="Luk"><span aria-hidden="true">&times;</span></button>
-					<button data-ng-click="vedAendring('æ', true)" type="button" class="btn btn-default btn-xs">æ</button>
-					<button data-ng-click="vedAendring('ø', true)" type="button" class="btn btn-default btn-xs">ø</button>
-					<button data-ng-click="vedAendring('å', true)" type="button" class="btn btn-default btn-xs">å</button>
-					<button data-ng-click="vedAendring('á', true)" type="button" class="btn btn-default btn-xs">á</button>
-					<button data-ng-click="vedAendring('é', true)" type="button" class="btn btn-default btn-xs">é</button>
-					<button data-ng-click="vedAendring('è', true)" type="button" class="btn btn-default btn-xs">è</button>
-					<button data-ng-click="vedAendring('ü', true)" type="button" class="btn btn-default btn-xs">ü</button>
-					<h4 data-ng-bind="soegehjaelp"></h4>
-					<span data-ng-bind="soegehjaelpBegynder"></span><br>
-					<span data-ng-bind="soegehjaelpEnder"></span>
-				</div>
-			</div>
-			<input data-ng-model="soegetekst" data-ng-change="vedAendring(soegetekst, false)" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" id="soegetekst" class="form-control notranslate" autofocus>
-		</header>
-		<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide">
-		<section data-ng-show="ordforslag.length" class="row col-md-12">
-			<div class="nomatch">
-				<h3>
-					<span data-ng-bind="menteDu" class="highlight"></span>
-				</h3>
-				<ul data-ng-show="ordbog" class="ordbog ng-hide notranslate">
-					<li ng-repeat="ord in ordforslag">
-						<a data-ng-bind="ord" data-ng-click="vedAendring(ord, false)" href="#"></a>
-					</li>
-				</ul>
+		<section data-ng-if="sprog != 'da'" class="row clearfix">
+			<div class="col-xs-12">
+				<div id="google_translate_element" class="pull-right"></div>
 			</div>
 		</section>
-		<section data-ng-show="ordbog" data-ng-bind-html="opslag" class="row col-md-12 ordbog ng-hide"></section>
-		<footer data-ng-if="opslag" class="row col-md-12">
-			<hr>
-			<small class="pull-right"><em data-ng-bind="manifest.version" class="text-muted notranslate"></em></small>
+		<header>
+			<div class="row">
+				<div class="col-xs-10">
+					<h3 data-ng-bind="manifest.name"></h3>
+				</div>
+				<div class="col-xs-2">
+					<h6 data-ng-click="visSoegehjaelp = true" data-ng-hide="visSoegehjaelp" class="text-right text-muted" role="button"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span></h6>
+				</div>
+			</div>
+			<div class="row">
+				<div data-ng-show="visSoegehjaelp" id="soegehjaelp" class="col-xs-12">
+					<div class="well well-sm" role="alert">
+						<button data-ng-click="visSoegehjaelp = false" type="button" class="close" data-dismiss="alert" aria-label="Luk"><span aria-hidden="true">&times;</span></button>
+						<button data-ng-click="vedAendring('æ', true, false)" type="button" class="btn btn-default btn-xs">æ</button>
+						<button data-ng-click="vedAendring('ø', true, false)" type="button" class="btn btn-default btn-xs">ø</button>
+						<button data-ng-click="vedAendring('å', true, false)" type="button" class="btn btn-default btn-xs">å</button>
+						<button data-ng-click="vedAendring('á', true, false)" type="button" class="btn btn-default btn-xs">á</button>
+						<button data-ng-click="vedAendring('é', true, false)" type="button" class="btn btn-default btn-xs">é</button>
+						<button data-ng-click="vedAendring('è', true, false)" type="button" class="btn btn-default btn-xs">è</button>
+						<button data-ng-click="vedAendring('ü', true, false)" type="button" class="btn btn-default btn-xs">ü</button>
+						<h4 data-ng-bind="soegehjaelp"></h4>
+						<span data-ng-bind="soegehjaelpBegynder"></span><br>
+						<span data-ng-bind="soegehjaelpEnder"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-xs-12">
+					<input data-ng-model="soegetekst" data-ng-change="vedAendring(soegetekst, false, false)" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" id="soegetekst" class="form-control notranslate" autofocus>
+				</div>
+			</div>
+		</header>
+		<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide">
+		<section data-ng-if="ordforslag.length" class="row">
+			<div class="col-xs-12">
+				<div class="nomatch">
+					<h3>
+						<span data-ng-bind="menteDu" class="highlight"></span>
+					</h3>
+					<ul data-ng-show="ordbog" class="ordbog ng-hide notranslate">
+						<li ng-repeat="ord in ordforslag">
+							<a data-ng-bind="ord" data-ng-click="vedAendring(ord, false, true)" href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section data-ng-if="opslag" class="row">
+			<div data-ng-show="ordbog" data-ng-bind-html="opslag" class="col-xs-12 ordbog ng-hide"></div>
+		</section>
+		<footer data-ng-if="opslag" class="row clearfix">
+			<div class="col-xs-12">
+				<hr>
+				<small class="pull-right"><em data-ng-bind="manifest.version" class="text-muted notranslate"></em></small>
+			</div>
 		</footer>
 	</main>
 	<script src="../js/konfiguration.min.js"></script>
-	<script src="../js/analyticstracking.min.js"></script>
+	<script src="../js/analytics.min.js"></script>
 	<script src="../js/element.min.js?cb=googleTranslateElementInit"></script>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
