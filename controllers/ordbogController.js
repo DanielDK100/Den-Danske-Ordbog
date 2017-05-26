@@ -27,7 +27,7 @@ function soeg(soegetekst, menteDu) {
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
-            menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - mente du', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
+            menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
             var opslag = $(html).filter('.ar')[0];
             var ordforslag = [];
             angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {
@@ -41,7 +41,7 @@ function soeg(soegetekst, menteDu) {
             $scope.indlaes = false;
             $scope.ordbog = true; 
         }).always(function() {
-            $scope.$apply();   
+            $scope.$apply();
         });
     }
     else {

@@ -14,9 +14,9 @@
 </head>
 <body>	
 	<main data-ng-init="initialiser()" class="container">
-		<section data-ng-if="sprog != 'da'" class="row clearfix">
-			<div class="col-xs-12">
-				<div id="google_translate_element" class="pull-right"></div>
+		<section data-ng-if="sprog != 'da'" class="row">
+			<div class="col-xs-12 text-right">
+				<div id="google_translate_element"></div>
 			</div>
 		</section>
 		<header>
@@ -45,8 +45,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-xs-12">
+			<div class="row">
+				<div class="col-xs-12 form-group">
 					<input data-ng-model="soegetekst" data-ng-change="vedAendring(soegetekst, false, false)" data-ng-model-options="{debounce: 300}" data-ng-style="background" placeholder="{{placeholder}}" id="soegetekst" class="form-control notranslate" autofocus>
 				</div>
 			</div>
@@ -69,10 +69,10 @@
 		<section data-ng-if="opslag" class="row">
 			<div data-ng-show="ordbog" data-ng-bind-html="opslag" class="col-xs-12 ordbog ng-hide"></div>
 		</section>
-		<footer data-ng-if="opslag" class="row clearfix">
-			<div class="col-xs-12">
+		<footer data-ng-if="opslag" class="row">
+			<div class="col-xs-12 text-right">
 				<hr>
-				<small class="pull-right"><em data-ng-bind="manifest.version" class="text-muted notranslate"></em></small>
+				<small><em data-ng-bind="manifest.version" class="text-muted notranslate"></em></small>
 			</div>
 		</footer>
 	</main>
