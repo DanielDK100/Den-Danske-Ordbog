@@ -6,24 +6,21 @@ angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
     $scope.soegetekst = '';
     $scope.indlaes = false;
     $scope.sprog = chrome.i18n.getMessage('@@ui_locale');
-    $scope.soegehjaelp = chrome.i18n.getMessage('popupSoegehjaelp');
-    $scope.soegehjaelpBegynder = chrome.i18n.getMessage('popupSoegehjaelpBegynder');
-    $scope.soegehjaelpEnder = chrome.i18n.getMessage('popupSoegehjaelpEnder');
     $scope.placeholder = chrome.i18n.getMessage('popupPlaceholder');
     $scope.menteDu = chrome.i18n.getMessage('popupMenteDu');
     $scope.indlaeser = chrome.i18n.getMessage('popupIndlaeser');
     $scope.manifest = chrome.runtime.getManifest();
     $scope.background = {
         'background': 'url("../' + $scope.manifest.icons['128'] + '") no-repeat right / 20px content-box'
-    }
+    };
 };
 $scope.vedAendring = function(soegetekst, erBogstav, menteDu) {
-    erBogstav ? $scope.soegetekst += soegetekst : $scope.soegetekst = soegetekst
+    erBogstav ? $scope.soegetekst += soegetekst : $scope.soegetekst = soegetekst;
     soeg($scope.soegetekst, menteDu);
 };
 function soeg(soegetekst, menteDu) {
     if (soegetekst !== '') {
-        $scope.ordbog = false;
+        $scope.opslagAnimation = false;
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
@@ -39,7 +36,7 @@ function soeg(soegetekst, menteDu) {
             $scope.ordforslag = ordforslag;
             $scope.opslag = $(opslag).html() ? $(opslag).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
             $scope.indlaes = false;
-            $scope.ordbog = true; 
+            $scope.opslagAnimation = true; 
         }).always(function() {
             $scope.$apply();
         });

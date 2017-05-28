@@ -1,10 +1,9 @@
+chrome.runtime.setUninstallURL('http://danielwinther.dk/den-danske-ordbog/afinstallation');
 var manifest = chrome.runtime.getManifest();
-chrome.runtime.onInstalled.addListener(function() {
-	chrome.contextMenus.create({
-		title: chrome.i18n.getMessage('eventSlaaOp'), 
-		contexts: ['selection'],
-		id: 'context' + 'selection',
-	});
+chrome.contextMenus.create({
+	title: chrome.i18n.getMessage('eventSlaaOp'), 
+	contexts: ['selection'],
+	id: 'context' + 'selection',
 });
 chrome.contextMenus.onClicked.addListener(klikHandler);
 function klikHandler(info, tab) {
