@@ -7,9 +7,9 @@ chrome.contextMenus.removeAll(function() {
 		id: 'context' + 'selection',
 	});
 });
+
 chrome.contextMenus.onClicked.addListener(klikHandler);
 function klikHandler(info, tab) {
-	ga('send', 'pageview', 'event.js');
 	var soegetekst = info.selectionText.replace(/\./g, '').replace(/,/g, '').replace(/\//g, ' ');
 	$.each((soegetekst).split(' '), function(key, nytOrd) {
 		if (key >= 4) {

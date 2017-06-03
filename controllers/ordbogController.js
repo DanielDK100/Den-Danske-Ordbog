@@ -1,7 +1,6 @@
 angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
 .controller('OrdbogController', ['$scope', function($scope) {
   $scope.initialiser = function() {
-    ga('send', 'pageview', 'popup.html');
     console.log(chrome.i18n.getMessage('popupUdvikling') + ' AngularJS ' + angular.version.full);
     $scope.soegetekst = '';
     $scope.indlaes = false;

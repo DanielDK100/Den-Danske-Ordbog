@@ -5,3 +5,4 @@
 ga('create', konfiguration.googleAnalytics, 'auto');
 ga('set', 'checkProtocolTask', function(){});
 ga('require', 'displayfeatures');
+ga('send', 'pageview');
