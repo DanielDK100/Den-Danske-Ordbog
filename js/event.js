@@ -1,4 +1,4 @@
-chrome.runtime.setUninstallURL('http://danielwinther.dk/den-danske-ordbog/afinstallation');
+chrome.runtime.setUninstallURL('http://den-danske-ordbog.danielwinther.dk/afinstallation');
 var manifest = chrome.runtime.getManifest();
 chrome.contextMenus.removeAll(function() {
 	chrome.contextMenus.create({
