@@ -3,6 +3,7 @@ angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
   $scope.initialiser = function() {
     console.log(chrome.i18n.getMessage('popupUdvikling') + ' AngularJS ' + angular.version.full);
     $scope.soegetekst = '';
+    $scope.opslagAnimation = false;
     $scope.indlaes = false;
     $scope.sprog = chrome.i18n.getMessage('@@ui_locale');
     $scope.placeholder = chrome.i18n.getMessage('popupPlaceholder');
@@ -35,7 +36,7 @@ function soeg(soegetekst, menteDu) {
             $scope.ordforslag = ordforslag;
             $scope.opslag = $(opslag).html() ? $(opslag).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
             $scope.indlaes = false;
-            $scope.opslagAnimation = true; 
+            $scope.opslagAnimation = true;
         }).always(function() {
             $scope.$apply();
         });

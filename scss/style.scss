@@ -1,10 +1,19 @@
+$primaer-farve: #598AA3;
+
 html {
 	height: 0px !important;
 }
 body {
+	.ui-state-active a,
+	.ui-state-active a:link,
+	.ui-state-active a:visited,
+	.ui-widget-content .ui-state-active {
+		background: $primaer-farve;
+		border: none;
+	}
 	::selection {
 		color: white;
-		background: #598AA3;
+		background: $primaer-farve;
 	}
 	.container {
 		width: 350px;

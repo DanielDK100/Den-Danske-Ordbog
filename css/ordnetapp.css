@@ -1,3 +1,4 @@
+
 body {
     line-height: 1.4em;
     font-family: Georgia,Times,"Times New Roman",serif;
@@ -244,6 +245,45 @@ span.onyms:before, span.etym:before, span.phon:before {
 }
 
 /* Andre elementer */
+
+.super {
+ vertical-align: super;
+ font-size: 75%;
+ margin-top: -0.3em;
+}
+
+.sub {
+ vertical-align: sub;
+ font-size: 75%;
+ margin-top: -0.3em;
+}
+
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.fraction, .numerator, .denominator {
+    padding: 0 5px;
+    line-height: 1em;
+}
+
+.numerator {
+    display: inline-block;
+    padding-bottom: 3px;
+}
+
+.denominater {
+    border-top: 1px solid #000;
+    display: block;
+}
+
+.artikelkilde{
+ margin-top: 16px;
+ padding-top: 8px;
+ line-height: 1em;
+}
 
 .short-result, .nomatch {
     background-color: #e0e5e8;

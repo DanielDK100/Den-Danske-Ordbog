@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html data-ng-app="Ordbog" data-ng-controller="OrdbogController">
+<html data-ng-app="Ordbog" data-ng-controller="OrdbogController" data-ng-lang="{{sprog}}">
 <head class="notranslate">
 	<meta charset="UTF-8">
 	<meta name="description" ng-attr-content="{{manifest.description}}">
 	<meta name="author" ng-attr-content="{{manifest.author}}">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="../css/jquery-ui.min.css">
-	<link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../node_modules/jquery-ui-dist/jquery-ui.min.css">
 	<link rel="stylesheet" href="../css/ordnetapp.min.css">
 	<link rel="stylesheet" href="../css/style.min.css">
 	<title data-ng-bind="manifest.name"></title>
@@ -62,7 +61,7 @@
 				</div>
 			</div>
 		</section>
-		<article data-ng-if="opslag" id="opslag" class="row">
+		<article id="opslag" class="row">
 			<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide notranslate">
 			<div data-ng-show="opslagAnimation" data-ng-bind-html="opslag" class="col-xs-12 opslagAnimation ng-hide"></div>
 		</article>
@@ -75,14 +74,14 @@
 	</main>
 	<script src="../js/konfiguration.min.js"></script>
 	<script src="../js/analytics.min.js"></script>
-	<script src="../js/element.min.js?cb=googleTranslateElementInit"></script>
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/jquery-ui.min.js"></script>
+	<script data-ng-if="sprog != 'da'" src="../js/element.min.js?cb=googleTranslateElementInit"></script>
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 	<script src="../js/autocomplete.min.js"></script>
-	<script src="../js/angular.min.js"></script>
-	<script src="../js/angular-animate.min.js"></script>
-	<script src="../js/angular-sanitize.min.js"></script>
+	<script src="../node_modules/angular/angular.min.js"></script>
+	<script src="../node_modules/angular-animate/angular-animate.min.js"></script>
+	<script src="../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
 	<script src="../controllers/ordbogController.min.js"></script>
 </body>
 </html>
