@@ -3,8 +3,6 @@ angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
   $scope.initialiser = function() {
     console.log(chrome.i18n.getMessage('popupUdvikling') + ' AngularJS ' + angular.version.full);
     $scope.soegetekst = '';
-    $scope.opslagAnimation = false;
-    $scope.indlaes = false;
     $scope.sprog = chrome.i18n.getMessage('@@ui_locale');
     $scope.placeholder = chrome.i18n.getMessage('popupPlaceholder');
     $scope.menteDu = chrome.i18n.getMessage('popupMenteDu');
@@ -48,7 +46,7 @@ function soeg(soegetekst, menteDu) {
 }
 }])
 function googleTranslateElementInit() {
-    if (chrome.i18n.getMessage('@@ui_locale') != 'da') {
-        new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
-    }
+    
+    new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
+    
 }
