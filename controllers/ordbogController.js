@@ -1,7 +1,7 @@
 angular.module('Ordbog', ['ngSanitize', 'ngAnimate'])
-.controller('OrdbogController', ['$scope', function($scope) {
+.controller('OrdbogController', ['$scope', function($scope) {   
   $scope.initialiser = function() {
-    console.log(chrome.i18n.getMessage('popupUdvikling') + ' AngularJS ' + angular.version.full);
+    console.log(chrome.i18n.getMessage('popupUdvikling') + '%c%s', 'color: #B52E31;', ' AngularJS ' + angular.version.full);
     $scope.soegetekst = '';
     $scope.sprog = chrome.i18n.getMessage('@@ui_locale');
     $scope.placeholder = chrome.i18n.getMessage('popupPlaceholder');
@@ -18,7 +18,7 @@ $scope.vedAendring = function(soegetekst, erBogstav, menteDu) {
 };
 function soeg(soegetekst, menteDu) {
     if (soegetekst !== '') {
-        $scope.opslagAnimation = false;
+        $scope.opslagAnimation = false; 
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
@@ -46,7 +46,5 @@ function soeg(soegetekst, menteDu) {
 }
 }])
 function googleTranslateElementInit() {
-    
     new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
-    
 }

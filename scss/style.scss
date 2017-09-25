@@ -10,50 +10,50 @@ $primaer-farve: #598AA3;
 
 html {
 	height: 0px !important;
-}
-body {
-	.ui-state-active a,
-	.ui-state-active a:link,
-	.ui-state-active a:visited,
-	.ui-widget-content .ui-state-active {
-		background: $primaer-farve;
-		border: none;
-	}
-	::selection {
-		color: white;
-		background: $primaer-farve;
-	}
-	.container {
-		width: 350px;
-		.indlaes {
-			@include transition (0.1s);
-			opacity: 1;
+	body {
+		.ui-state-active a,
+		.ui-state-active a:link,
+		.ui-state-active a:visited,
+		.ui-widget-content .ui-state-active {
+			background: $primaer-farve;
+			border: none;
 		}
-		.indlaes.ng-hide {
-			@include transition (0.4s);
-			opacity: 0;
+		::selection {
+			color: white;
+			background: $primaer-farve;
 		}
-		.opslagAnimation {
-			word-wrap: break-word;
-			@include transition (0.5s);
-			opacity: 1;
-		}
-		.opslagAnimation.ng-hide {
-			@include transition (0.5s); 
-			opacity: 0;
-		}
-		#opslag {
-			position: relative;
-		}
-		#indlaes {
-			position: absolute;
-			margin: 0 auto;
-			left: 0;
-			right: 0;
-			z-index: 1;
-		}
-		.audio {
-			display: none;
+		.container {
+			width: 350px;
+			.indlaes {
+				@include transition (.1s);
+				opacity: 1;
+			}
+			.indlaes.ng-hide {
+				@include transition (.4s);
+				opacity: 0;
+			}
+			.opslagAnimation {
+				word-wrap: break-word;
+				@include transition (.5s);
+				opacity: 1;
+			}
+			.opslagAnimation.ng-hide {
+				@include transition (.5s); 
+				opacity: 0;
+			}
+			#opslag {
+				position: relative;
+			}
+			#indlaes {
+				position: absolute;
+				margin: 0 auto;
+				left: 0;
+				right: 0;
+				z-index: 1;
+			}
+			.audio {
+				display: none;
+			}
 		}
 	}
 }
