@@ -108,6 +108,10 @@ a:hover {
     font-style: italic;
 }
 
+.dtrn .k {
+    font-style: italic;
+}
+
 .dtrn .k a {
     font-weight: normal;
 }
@@ -422,4 +426,8 @@ audio {
 sup {
     vertical-align: super;
     font-size: xx-small;
+}
+
+.em {
+    font-style: italic;
 }
