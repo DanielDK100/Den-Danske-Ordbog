@@ -67,7 +67,7 @@ function synonymAntonym(info, tab) {
 				opt.items.push({title: chrome.i18n.getMessage('eventIngenSynonymer'), message: ''});
 			}
 			$.each(synonymer, function(key, synonym) {
-				opt.items.push({title: $(synonym).text().trim().capitalize(), message: ''});
+				opt.items.push({title: $(synonym).text().trim().stortBogstav(), message: ''});
 			});
 			break;
 
@@ -80,7 +80,7 @@ function synonymAntonym(info, tab) {
 				opt.items.push({title: chrome.i18n.getMessage('eventIngenAntonymer'), message: ''});
 			}
 			$.each(antonymer, function(key, antonym) {
-				opt.items.push({title: $(antonym).text().trim().capitalize(), message: ''});
+				opt.items.push({title: $(antonym).text().trim().stortBogstav(), message: ''});
 			});
 			break;
 		}
@@ -128,7 +128,7 @@ chrome.notifications.onClicked.addListener(function notificationId(nytOrd) {
 		chrome.notifications.clear(nytOrd);
 	});
 })
-String.prototype.capitalize = function() {
+String.prototype.stortBogstav = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 }
 function fjernDuplikationer(objekter) {

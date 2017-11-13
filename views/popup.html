@@ -54,7 +54,7 @@
 						<span data-ng-bind="menteDu" class="highlight"></span>
 					</h3>
 					<ul>
-						<li ng-repeat="ord in ordforslag">
+						<li ng-repeat="ord in ordforslag track by $index">
 							<a data-ng-bind="ord" data-ng-click="vedAendring(ord, false, true)" href="#"></a>
 						</li>
 					</ul>
@@ -62,8 +62,13 @@
 			</div>
 		</section>
 		<article id="opslag" class="row">
+			<div class="col-xs-12">
+				<h3 data-ng-if="!opslag.length && soegetekst" data-ng-bind="ingenResultater"></h3>
+				<div data-ng-repeat="betydning in opslag track by $index">
+					<div data-ng-bind-html="betydning" class="ar"></div>
+				</div>
+			</div>
 			<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide notranslate">
-			<div data-ng-show="opslagAnimation" data-ng-bind-html="opslag" class="col-xs-12 opslagAnimation ng-hide"></div>
 		</article>
 		<footer data-ng-if="opslag" class="row notranslate">
 			<div class="col-xs-12 text-right">

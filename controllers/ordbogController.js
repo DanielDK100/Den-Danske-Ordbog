@@ -18,12 +18,14 @@ $scope.vedAendring = function(soegetekst, erBogstav, menteDu) {
 };
 function soeg(soegetekst, menteDu) {
     if (soegetekst !== '') {
-        $scope.opslagAnimation = false; 
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
             menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
-            var opslag = $(html).filter('.ar')[0];
+            var opslag = []
+            angular.forEach($(html).filter('.ar'), function(betydning) {
+                this.push($(betydning).html());
+            }, opslag);
             var ordforslag = [];
             angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {
                 if (key >= 5) {
@@ -32,9 +34,9 @@ function soeg(soegetekst, menteDu) {
                 this.push($(ord).text());
             }, ordforslag);
             $scope.ordforslag = ordforslag;
-            $scope.opslag = $(opslag).html() ? $(opslag).html() : '<h3>' + chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"</h3>';
+            $scope.ingenResultater = chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"';
+            $scope.opslag = opslag;
             $scope.indlaes = false;
-            $scope.opslagAnimation = true;
         }).always(function() {
             $scope.$apply();
         });
