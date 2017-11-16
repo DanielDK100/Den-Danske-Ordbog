@@ -61,16 +61,16 @@
 				</div>
 			</div>
 		</section>
-		<article id="opslag" class="row">
+		<article id="betydninger" class="row">
 			<div class="col-xs-12">
-				<h3 data-ng-if="!opslag.length && soegetekst" data-ng-bind="ingenResultater"></h3>
-				<div data-ng-repeat="betydning in opslag track by $index">
+				<h3 data-ng-if="!betydninger.length && soegetekst" data-ng-bind="ingenResultater"></h3>
+				<div data-ng-repeat="betydning in betydninger track by $index">
 					<div data-ng-bind-html="betydning" class="ar"></div>
 				</div>
 			</div>
 			<img data-ng-show="indlaes" src="../img/indlaeser.svg" alt="{{indlaeser}}" id="indlaes" class="indlaes ng-hide notranslate">
 		</article>
-		<footer data-ng-if="opslag" class="row notranslate">
+		<footer data-ng-if="betydninger" class="row notranslate">
 			<div class="col-xs-12 text-right">
 				<hr>
 				<small><em data-ng-bind="manifest.version" class="text-muted"></em></small>

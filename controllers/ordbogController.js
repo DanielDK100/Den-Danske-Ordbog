@@ -22,10 +22,10 @@ function soeg(soegetekst, menteDu) {
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
             menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
-            var opslag = []
+            var betydninger = []
             angular.forEach($(html).filter('.ar'), function(betydning) {
                 this.push($(betydning).html());
-            }, opslag);
+            }, betydninger);
             var ordforslag = [];
             angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {
                 if (key >= 5) {
@@ -35,7 +35,7 @@ function soeg(soegetekst, menteDu) {
             }, ordforslag);
             $scope.ordforslag = ordforslag;
             $scope.ingenResultater = chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"';
-            $scope.opslag = opslag;
+            $scope.betydninger = betydninger;
             $scope.indlaes = false;
         }).always(function() {
             $scope.$apply();
@@ -43,7 +43,7 @@ function soeg(soegetekst, menteDu) {
     }
     else {
         $scope.ordforslag = null;
-        $scope.opslag = null;
+        $scope.betydninger = null;
     }
 }
 }])
