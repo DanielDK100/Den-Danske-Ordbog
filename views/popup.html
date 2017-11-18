@@ -61,7 +61,7 @@
 				</div>
 			</div>
 		</section>
-		<article id="betydninger" class="row">
+		<article data-ng-if="betydninger" id="betydninger" class="row">
 			<div class="col-xs-12">
 				<h3 data-ng-if="!betydninger.length && soegetekst" data-ng-bind="ingenResultater"></h3>
 				<div data-ng-repeat="betydning in betydninger track by $index">
