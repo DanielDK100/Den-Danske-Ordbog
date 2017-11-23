@@ -22,20 +22,9 @@ function soeg(soegetekst, menteDu) {
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
             menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
-            var betydninger = []
-            angular.forEach($(html).filter('.ar'), function(betydning) {
-                this.push($(betydning).html());
-            }, betydninger);
-            var ordforslag = [];
-            angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {
-                if (key >= 5) {
-                    return false;
-                }
-                this.push($(ord).text());
-            }, ordforslag);
-            $scope.ordforslag = ordforslag;
+            $scope.ordforslag = indlaesMenteDu(html);
             $scope.ingenResultater = chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"';
-            $scope.betydninger = betydninger;
+            $scope.betydninger = indlaesBetydninger(html);
             $scope.indlaes = false;
         }).always(function() {
             $scope.$apply();
@@ -47,6 +36,23 @@ function soeg(soegetekst, menteDu) {
     }
 }
 }])
+function indlaesMenteDu(html) {
+    angular.forEach($(html).filter('.nomatch').find('li'), function(ord, key) {
+        if (key >= 5) {
+            return false;
+        }
+        this.push($(ord).text());
+    }, ordforslag = []);
+
+    return ordforslag;
+}
+function indlaesBetydninger(html) {
+    angular.forEach($(html).filter('.ar'), function(betydning) {
+        this.push($(betydning).html());
+    }, betydninger = []);
+
+    return betydninger;
+}
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'da', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: konfiguration.googleAnalytics}, 'google_translate_element');
 }
