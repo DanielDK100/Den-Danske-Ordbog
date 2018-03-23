@@ -1,50 +1,50 @@
 $primaer-farve: #598AA3;
 
 @mixin transition($tid, $hvad: all, $hvordan: linear) {
-	-webkit-transition: $tid $hvad $hvordan;
-	-moz-transition:    $tid $hvad $hvordan;
-	-ms-transition:     $tid $hvad $hvordan;
-	-o-transition:      $tid $hvad $hvordan;
-	transition:         $tid $hvad $hvordan;
+    -webkit-transition: $tid $hvad $hvordan;
+    -moz-transition:    $tid $hvad $hvordan;
+    -ms-transition:     $tid $hvad $hvordan;
+    -o-transition:      $tid $hvad $hvordan;
+    transition:         $tid $hvad $hvordan;
 }
 
 html {
-	height: 0px !important;
-	body {
-		.ui-state-active a,
-		.ui-state-active a:link,
-		.ui-state-active a:visited,
-		.ui-widget-content .ui-state-active {
-			background: $primaer-farve;
-			border: none;
-		}
-		::selection {
-			color: white;
-			background: $primaer-farve;
-		}
-		.container {
-			width: 350px;
-			.indlaes {
-				@include transition (.1s);
-				opacity: 1;
-			}
-			.indlaes.ng-hide {
-				@include transition (.3s);
-				opacity: 0;
-			}
-			#betydninger {
-				position: relative;
-			}
-			#indlaes {
-				position: absolute;
-				margin: 0 auto;
-				left: 0;
-				right: 0;
-				z-index: 1000;
-			}
-			.audio {
-				display: none;
-			}
-		}
-	}
+    height: 0px !important;
+    body {
+        .ui-state-active a,
+        .ui-state-active a:link,
+        .ui-state-active a:visited,
+        .ui-widget-content .ui-state-active {
+            background: $primaer-farve;
+            border: none;
+        }
+        ::selection {
+            color: white;
+            background: $primaer-farve;
+        }
+        .container {
+            width: 350px;
+            .indlaes {
+                @include transition (.1s);
+                opacity: 1;
+            }
+            .indlaes.ng-hide {
+                @include transition (.3s);
+                opacity: 0;
+            }
+            #betydninger {
+                position: relative;
+            }
+            #indlaes {
+                position: absolute;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
+            .audio {
+                display: none;
+            }
+        }
+    }
 }

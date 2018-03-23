@@ -21,7 +21,9 @@ function soeg(soegetekst, menteDu) {
         $scope.indlaes = true;
         $.get(konfiguration.urlWs, {q: soegetekst})
         .done(function(html) {
-            menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst});
+            chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
+                menteDu ? ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup - ordforslag', eventLabel: soegetekst + ' - ' + tabs[0].url}) : ga('send', {hitType: 'event', eventCategory: 'Søgning', eventAction: 'Popup', eventLabel: soegetekst + ' - ' + tabs[0].url});
+            });
             $scope.ordforslag = indlaesMenteDu(html);
             $scope.ingenResultater = chrome.i18n.getMessage('extIngenResultater') + ' \"' + soegetekst + '\"';
             $scope.betydninger = indlaesBetydninger(html);
