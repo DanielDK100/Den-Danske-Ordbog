@@ -28,7 +28,7 @@ function klikHandler(info, tab) {
             var title = $(html).find('.head .k').first().text();
 
             if (!title) {
-                opt.buttons = [{title: chrome.i18n.getMessage('eventVisOrdforslag') }];
+                opt.buttons = [{title: chrome.i18n.getMessage('eventVisOrdforslag')}];
                 chrome.notifications.onButtonClicked.removeListener(synonymAntonym);
                 chrome.notifications.onButtonClicked.addListener(visForslag);
             }
