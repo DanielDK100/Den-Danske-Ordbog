@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Den Danske Ordbog",
+  "short_name": "DDO",
+  "description": "Foretag hurtige opslag i ordnets betydningsordbog - Den Danske Ordbog.",
+  "version": "3.0.0",
+  "permissions": ["notifications", "contextMenus", "storage"],
+  "host_permissions": ["https://*/*"],
+  "action": { "default_popup": "index.html" },
+  "icons": {
+    "128": "src/ikon128.png"
+  },
+  "background": {
+    "service_worker": "src/service-worker.ts",
+    "type": "module"
+  }
+}
