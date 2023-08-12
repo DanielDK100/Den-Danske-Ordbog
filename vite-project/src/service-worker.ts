@@ -59,7 +59,9 @@ class ServiceWorker {
       const { title, message, contextMessage } = searchResponse;
       const { icons } = extensionManifest;
 
-      const notificationOptions: chrome.notifications.NotificationOptions = {
+      const notificationOptions:
+        | chrome.notifications.NotificationOptions
+        | any = {
         type: "basic",
         title,
         message,
