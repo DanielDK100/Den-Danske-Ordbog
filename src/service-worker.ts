@@ -7,7 +7,7 @@ interface SearchResponse {
   contextMessage: string;
 }
 
-class ServiceWorker {
+export class ServiceWorker {
   private websocketUrl: string;
   private ddOrdbogUrl: string;
 
@@ -23,21 +23,26 @@ class ServiceWorker {
   }
 
   private async fetchSearchResults(word: string): Promise<SearchResponse> {
-    const response = await fetch(`${this.websocketUrl}?q=${word}`);
-    const html = await response.text();
-    const $ = load(html);
+    try {
+      const response = await fetch(`${this.websocketUrl}?q=${word}`);
+      const html = await response.text();
+      const $ = load(html);
 
-    const mainElement = $(".ar").first();
-    const titleElement = mainElement.find(".head .k").first();
-    const title = titleElement.text().replace(/\d+/g, "");
+      const mainElement = $(".ar").first();
+      const titleElement = mainElement.find(".head .k").first();
+      const title = titleElement.text().replace(/\d+/g, "");
 
-    const searchResponse: SearchResponse = {
-      title: title ? title : `Ingen resultater for "${word}"`,
-      message: $(".dtrn").text().trim() || "",
-      contextMessage: $(".m, .pos").text().trim() || "",
-    };
+      const searchResponse: SearchResponse = {
+        title: title ? title : `Ingen resultater for "${word}"`,
+        message: $(".dtrn").text().trim() || "",
+        contextMessage: $(".m, .pos").text().trim() || "",
+      };
 
-    return searchResponse;
+      return searchResponse;
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      throw error;
+    }
   }
 
   private async handleContextMenuClick(
@@ -54,26 +59,33 @@ class ServiceWorker {
 
     const words = searchString.split(" ").slice(0, 4);
 
-    for (const word of words) {
-      const searchResponse = await this.fetchSearchResults(word);
-      const { title, message, contextMessage } = searchResponse;
-      const { icons } = extensionManifest;
+    for (const [index, word] of words.entries()) {
+      if (index >= 4) {
+        return;
+      }
+      try {
+        const searchResponse = await this.fetchSearchResults(word);
+        const { title, message, contextMessage } = searchResponse;
+        const { icons } = extensionManifest;
 
-      const notificationOptions:
-        | chrome.notifications.NotificationOptions
-        | any = {
-        type: "basic",
-        title,
-        message,
-        contextMessage,
-        iconUrl: icons?.["128"],
-      };
+        const notificationOptions:
+          | chrome.notifications.NotificationOptions
+          | any = {
+          type: "basic",
+          title,
+          message,
+          contextMessage,
+          iconUrl: icons?.["128"],
+        };
 
-      Analytics.fireEvent("search", {
-        context_menu: title,
-      });
+        Analytics.fireEvent("search", {
+          context_menu: title,
+        });
 
-      chrome.notifications.create(word, notificationOptions);
+        chrome.notifications.create(word, notificationOptions);
+      } catch (error) {
+        console.error("Error handling context menu click:", error);
+      }
     }
   }
 
@@ -106,4 +118,4 @@ class ServiceWorker {
   }
 }
 
-new ServiceWorker();
+export default new ServiceWorker();

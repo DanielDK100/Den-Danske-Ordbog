@@ -5,8 +5,18 @@
   "description": "Foretag hurtige opslag i ordnets betydningsordbog - Den Danske Ordbog.",
   "version": "3.0.0",
   "permissions": ["notifications", "contextMenus", "storage"],
-  "host_permissions": ["https://*/*"],
+  "host_permissions": ["https://ws.dsl.dk/*", "https://ordnet.dk/*"],
   "action": { "default_popup": "index.html" },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "windows": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U",
+        "linux": "Ctrl+Shift+U"
+      }
+    }
+  },
   "icons": {
     "128": "src/assets/images/icon.png"
   },

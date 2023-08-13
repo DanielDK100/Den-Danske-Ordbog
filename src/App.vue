@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, Ref, watch, version, onBeforeMount } from "vue";
-import { load } from "cheerio";
+import { load, Element } from "cheerio";
 import debounce from "lodash.debounce";
-import Analytics from "./google-analytics.js";
+import Analytics from "./google-analytics";
 
 // URLs
 const webSocketUrl: string = import.meta.env.VITE_WEBSOCKET_URL;
@@ -13,11 +13,12 @@ const suggestionsList: Ref<string[]> = ref([]);
 const showSuggestions: Ref<boolean> = ref(false);
 const searchString: Ref<string> = ref("");
 const htmlResponse: Ref<string | null> = ref(null);
-const meanings: Ref<string[]> = ref([]);
-const didYouMeanList: Ref<string[]> = ref([]);
+const meaningsList: Ref<string[]> = ref([]);
+const noMatchList: Ref<string[]> = ref([]);
 const isLoading: Ref<boolean> = ref(false);
 
 onBeforeMount(() => {
+  Analytics.firePageViewEvent(document.title, document.location.href);
   console.info(`Made with %c%s`, "color: #41b783;", `Vue.js ${version}`);
 });
 
@@ -36,24 +37,33 @@ async function fetchSearchResults(): Promise<void> {
     const response = await fetch(`${webSocketUrl}?q=${searchString.value}`);
     htmlResponse.value = await response.text();
 
-    const $ = parseHtmlStringToDocument(htmlResponse.value);
-
-    meanings.value = $(".ar")
-      .map((_index: number, element: Element) => $(element).html())
-      .get();
-    console.log(meanings);
-
-    didYouMeanList.value = $(".nomatch")
-      .find("li")
-      .map((_index: number, element: Element) => $(element).text())
-      .get();
-
+    parseHtmlResponse(htmlResponse.value);
     Analytics.fireEvent("search", { popup: searchString.value });
   } catch (error) {
     console.error("Error fetching search results:", error);
   } finally {
     isLoading.value = false;
   }
+}
+
+function parseHtmlResponse(response: string): void {
+  const $ = load(response);
+
+  parseMeaningsList($);
+  parseDidYouMeanList($);
+}
+
+function parseMeaningsList($: any): void {
+  meaningsList.value = $(".ar")
+    .map((_index: number, element: Element) => $(element).html())
+    .get();
+}
+
+function parseDidYouMeanList($: any): void {
+  noMatchList.value = $(".nomatch")
+    .find("li")
+    .map((_index: number, element: Element) => $(element).text())
+    .get();
 }
 
 async function fetchSuggestions(): Promise<void> {
@@ -63,7 +73,7 @@ async function fetchSuggestions(): Promise<void> {
     );
     const responseBody = await response.text();
 
-    const $ = parseHtmlStringToDocument(responseBody);
+    const $ = load(responseBody);
 
     suggestionsList.value = $("li")
       .map((_index: number, element: Element) => $(element).text().trim())
@@ -72,10 +82,6 @@ async function fetchSuggestions(): Promise<void> {
   } catch (error) {
     console.error("Error fetching suggestions:", error);
   }
-}
-
-function parseHtmlStringToDocument(body: string): any {
-  return load(body);
 }
 
 watch(
@@ -89,7 +95,9 @@ watch(
 
 <template>
   <main id="grid">
-    <h1>Den Danske Ordbog</h1>
+    <header>
+      <h1>Den Danske Ordbog</h1>
+    </header>
     <section class="autocomplete-container">
       <input
         v-model="searchString"
@@ -113,13 +121,13 @@ watch(
       </ul>
     </section>
 
-    <section class="nomatch" v-if="didYouMeanList.length > 0">
+    <section class="nomatch" v-if="noMatchList.length > 0">
       <h2>Ingen ord matcher søgningen</h2>
       <h3><span class="highlight">Mente du:</span></h3>
       <div>
         <ul class="suggestion-list">
           <li
-            v-for="(suggestion, index) in didYouMeanList"
+            v-for="(suggestion, index) in noMatchList"
             :key="index"
             @click="onSuggestionSelected(suggestion)"
           >
@@ -129,9 +137,9 @@ watch(
       </div>
     </section>
 
-    <section v-if="!isLoading" @click="showSuggestions = false">
-      <div v-for="(suggestion, index) in meanings" :key="index">
-        <div v-html="suggestion" class="ar"></div>
+    <section class="fade-in" v-if="!isLoading" @click="showSuggestions = false">
+      <div v-for="(meaning, index) in meaningsList" :key="index">
+        <div v-html="meaning" class="ar"></div>
       </div>
     </section>
 
@@ -140,6 +148,18 @@ watch(
 </template>
 
 <style lang="scss">
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 body {
   width: 350px;
 }
@@ -158,6 +178,8 @@ body {
       width: 100%;
       border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
+      padding-left: 10px;
 
       &:focus {
         outline: none;
