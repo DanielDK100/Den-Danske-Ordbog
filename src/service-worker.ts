@@ -59,10 +59,7 @@ export class ServiceWorker {
 
     const words = searchString.split(" ").slice(0, 4);
 
-    for (const [index, word] of words.entries()) {
-      if (index >= 4) {
-        return;
-      }
+    for (const word of words) {
       try {
         const searchResponse = await this.fetchSearchResults(word);
         const { title, message, contextMessage } = searchResponse;
