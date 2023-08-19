@@ -11,16 +11,20 @@
 }
 
 body {
-  width: 350px;
+  min-width: 350px;
 }
 #wrapper {
   display: grid;
   grid-auto-flow: row;
   gap: 5px;
   padding: 10px;
-  max-height: 400px;
   h1 {
     font-size: x-large;
+  }
+  #sticky {
+    position: sticky;
+    top: 5px;
+    z-index: 10;
   }
   input {
     width: 100%;
@@ -28,6 +32,8 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
     padding: 10px;
+    background: white url(../images/icons/icon128.png) no-repeat right 7px
+      bottom 7px / 20px;
 
     &:focus {
       outline: none;
@@ -35,11 +41,11 @@ body {
       box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
     }
   }
-  .autocomplete-container {
+  #autocomplete-container {
     position: relative;
-    .autocomplete-list {
+    #autocomplete-list {
       position: absolute;
-      top: -5px;
+      top: 0;
       left: 0;
       width: 100%;
       overflow-y: auto;

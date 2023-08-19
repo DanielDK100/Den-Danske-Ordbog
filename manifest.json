@@ -3,10 +3,12 @@
   "name": "Den Danske Ordbog",
   "short_name": "DDO",
   "description": "Foretag hurtige opslag i ordnets betydningsordbog - Den Danske Ordbog.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "permissions": ["notifications", "contextMenus", "storage"],
   "host_permissions": ["https://ws.dsl.dk/*", "https://ordnet.dk/*"],
-  "action": { "default_popup": "index.html" },
+  "action": {
+    "default_popup": "index.html"
+  },
   "commands": {
     "_execute_action": {
       "suggested_key": {
@@ -18,7 +20,7 @@
     }
   },
   "icons": {
-    "128": "src/assets/images/icon.png"
+    "128": "src/assets/images/icons/icon128.png"
   },
   "background": {
     "service_worker": "src/service-worker.ts",
