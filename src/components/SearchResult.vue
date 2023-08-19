@@ -5,6 +5,7 @@ import debounce from "lodash.debounce";
 import Analytics from "../google-analytics";
 import Spinner from "./Spinner.vue";
 import SearchProps from "../interfaces/SearchProps";
+import { EventNames } from "../enums/EventNames";
 
 const props = defineProps<SearchProps>();
 const emit = defineEmits(["search"]);
@@ -30,7 +31,9 @@ async function fetchSearchResults(): Promise<void> {
     htmlResponse.value = await response.text();
 
     parseHtmlResponse(htmlResponse.value);
-    Analytics.fireEvent("search", { popup: props.searchString });
+    Analytics.fireEvent(EventNames.Search, {
+      [EventNames.Popup]: props.searchString,
+    });
   } catch (error) {
     console.error("Error fetching search results:", error);
   } finally {

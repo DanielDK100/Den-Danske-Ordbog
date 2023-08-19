@@ -1,11 +1,7 @@
 import { load } from "cheerio";
 import Analytics from "./google-analytics";
-
-interface SearchResponse {
-  title: string;
-  message: string;
-  contextMessage: string;
-}
+import SearchResponse from "./interfaces/SearchResponse";
+import { EventNames } from "./enums/EventNames";
 
 export class ServiceWorker {
   private websocketUrl: string;
@@ -75,8 +71,8 @@ export class ServiceWorker {
           iconUrl: icons?.["128"],
         };
 
-        Analytics.fireEvent("search", {
-          context_menu: title,
+        Analytics.fireEvent(EventNames.Search, {
+          [EventNames.ContextMenu]: title,
         });
 
         chrome.notifications.create(word, notificationOptions);
@@ -108,8 +104,8 @@ export class ServiceWorker {
       chrome.tabs.create({ url: self.ddOrdbogUrl + word }, function openTab() {
         chrome.notifications.clear(word);
       });
-      Analytics.fireEvent("search", {
-        click: word,
+      Analytics.fireEvent(EventNames.Search, {
+        [EventNames.Click]: word,
       });
     });
   }
