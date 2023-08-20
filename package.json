@@ -11,8 +11,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "lodash.debounce": "^4.0.8",
-    "vue": "^3.3.4",
-    "vue-gtag": "^2.0.1"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.18",

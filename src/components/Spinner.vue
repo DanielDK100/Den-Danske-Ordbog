@@ -1,3 +1,3 @@
 <template>
-  <img src="../assets/images/spinner.svg" alt="Spinner" id="spinner" />
+  <img src="../assets/images/spinner.svg" alt="Spinner" class="spinner" />
 </template>

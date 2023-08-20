@@ -6,10 +6,12 @@ import { EventNames } from "./enums/EventNames";
 export class ServiceWorker {
   private websocketUrl: string;
   private ddOrdbogUrl: string;
+  private extensionManifest: chrome.runtime.Manifest;
 
   constructor() {
     this.websocketUrl = import.meta.env.VITE_WEBSOCKET_URL;
     this.ddOrdbogUrl = import.meta.env.VITE_DDO_ORDBOG_URL;
+    this.extensionManifest = chrome.runtime.getManifest();
 
     this.createContextMenu();
     this.setupNotificationClickHandler();
@@ -51,15 +53,14 @@ export class ServiceWorker {
       .replace(/[.,/]/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-    const extensionManifest = chrome.runtime.getManifest();
 
-    const words = searchString.split(" ").slice(0, 4);
+    const selectedWords = searchString.split(" ").slice(0, 4);
 
-    for (const word of words) {
+    for (const word of selectedWords) {
       try {
         const searchResponse = await this.fetchSearchResults(word);
         const { title, message, contextMessage } = searchResponse;
-        const { icons } = extensionManifest;
+        const { icons } = this.extensionManifest;
 
         const notificationOptions:
           | chrome.notifications.NotificationOptions
@@ -96,12 +97,8 @@ export class ServiceWorker {
   }
 
   private setupNotificationClickHandler(): void {
-    const self = this;
-
-    chrome.notifications.onClicked.addListener(function handleNotificationClick(
-      word
-    ) {
-      chrome.tabs.create({ url: self.ddOrdbogUrl + word }, function openTab() {
+    chrome.notifications.onClicked.addListener((word) => {
+      chrome.tabs.create({ url: `${this.ddOrdbogUrl}?query=${word}` }, () => {
         chrome.notifications.clear(word);
       });
       Analytics.fireEvent(EventNames.Search, {

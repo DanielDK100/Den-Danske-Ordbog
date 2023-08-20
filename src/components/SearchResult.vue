@@ -8,7 +8,7 @@ import SearchProps from "../interfaces/SearchProps";
 import { EventNames } from "../enums/EventNames";
 
 const props = defineProps<SearchProps>();
-const emit = defineEmits(["search"]);
+const emit = defineEmits(["search", "click"]);
 
 const webSocketUrl: string = import.meta.env.VITE_WEBSOCKET_URL;
 const htmlResponse: Ref<string | null> = ref(null);
@@ -18,6 +18,10 @@ const isLoading: Ref<boolean> = ref(false);
 
 function onSuggestionSelected(selectedSuggestion: string): void {
   emit("search", selectedSuggestion);
+}
+
+function onClickedElement(): void {
+  emit("click");
 }
 
 async function fetchSearchResults(): Promise<void> {
@@ -40,6 +44,7 @@ async function fetchSearchResults(): Promise<void> {
     isLoading.value = false;
   }
 }
+
 function parseHtmlResponse(response: string): void {
   const $ = load(response);
 
@@ -84,11 +89,10 @@ watch(
     </div>
   </section>
 
-  <section class="fade-in" v-if="!isLoading">
-    <div v-for="(meaning, index) in meaningsList" :key="index">
+  <article @click="onClickedElement" class="fade-in" v-if="!isLoading">
+    <section v-for="(meaning, index) in meaningsList" :key="index">
       <div v-html="meaning" class="ar"></div>
-    </div>
-  </section>
-
+    </section>
+  </article>
   <Spinner v-else />
 </template>

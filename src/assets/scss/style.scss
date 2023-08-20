@@ -34,7 +34,6 @@ body {
     padding: 10px;
     background: white url(../images/icons/icon128.png) no-repeat right 7px
       bottom 7px / 20px;
-
     &:focus {
       outline: none;
       border-color: #007bff;
@@ -54,7 +53,6 @@ body {
       border-radius: 4px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       z-index: 1;
-
       li {
         list-style: none;
         padding: 5px 10px;
@@ -68,12 +66,12 @@ body {
     }
   }
 
+  .spinner {
+    place-self: center;
+  }
   .wide-button,
   .copyright,
   .audio {
     display: none;
-  }
-  #spinner {
-    place-self: center;
   }
 }

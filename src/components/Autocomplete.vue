@@ -42,7 +42,7 @@ watch(
 </script>
 <template>
   <section id="autocomplete-container">
-    <ul v-if="autocompleteList.length > 0" id="autocomplete-list">
+    <ul id="autocomplete-list" v-if="autocompleteList.length > 0">
       <li
         v-for="(autocompleteItem, index) in autocompleteList"
         :key="index"
