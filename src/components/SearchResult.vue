@@ -8,7 +8,10 @@ import SearchProps from "../interfaces/SearchProps";
 import { EventNames } from "../enums/EventNames";
 
 const props = defineProps<SearchProps>();
-const emit = defineEmits(["search", "click"]);
+const emit = defineEmits<{
+  search: [value: string];
+  click: [];
+}>();
 
 const webSocketUrl: string = import.meta.env.VITE_WEBSOCKET_URL;
 const htmlResponse: Ref<string | null> = ref(null);

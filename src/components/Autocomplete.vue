@@ -5,9 +5,11 @@ import debounce from "lodash.debounce";
 import SearchProps from "../interfaces/SearchProps";
 
 const props = defineProps<SearchProps>();
-const autocompleteUrl: string = import.meta.env.VITE_AUTOCOMPLETE_URL;
+const emit = defineEmits<{
+  search: [value: string];
+}>();
 
-const emit = defineEmits(["search"]);
+const autocompleteUrl: string = import.meta.env.VITE_AUTOCOMPLETE_URL;
 const autocompleteList: Ref<string[]> = ref([]);
 
 function onAutocompleteSelected(selectedAutocomplete: string): void {
