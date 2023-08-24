@@ -5,17 +5,12 @@ const GA_DEBUG_ENDPOINT = "https://www.google-analytics.com/debug/mp/collect";
 const MEASUREMENT_ID = import.meta.env.VITE_MEASUREMENT_ID;
 const API_SECRET = import.meta.env.VITE_API_SECRET;
 const DEFAULT_ENGAGEMENT_TIME_MSEC = 100;
+const DEBUG = import.meta.env.DEV;
 
 // Duration of inactivity after which a new session is created
 const SESSION_EXPIRATION_IN_MIN = 30;
 
 export class Analytics {
-  private debug: boolean;
-
-  constructor(debug = false) {
-    this.debug = debug;
-  }
-
   private async getOrCreateClientId(): Promise<string> {
     let { clientId } = await chrome.storage.local.get("clientId");
     if (!clientId) {
@@ -64,7 +59,7 @@ export class Analytics {
     try {
       const response = await fetch(
         `${
-          this.debug ? GA_DEBUG_ENDPOINT : GA_ENDPOINT
+          DEBUG ? GA_DEBUG_ENDPOINT : GA_ENDPOINT
         }?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`,
         {
           method: "POST",
@@ -79,7 +74,7 @@ export class Analytics {
           }),
         }
       );
-      if (!this.debug) {
+      if (!DEBUG) {
         return;
       }
       console.log(await response.text());
