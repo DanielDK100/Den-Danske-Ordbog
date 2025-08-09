@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from "vue";
+import { ref, Ref, watch, nextTick } from "vue";
 import { load, Element, CheerioAPI } from "cheerio";
 import debounce from "lodash.debounce";
 import Analytics from "../google-analytics";
@@ -57,16 +57,34 @@ function parseHtmlResponse(response: string): void {
 
 function parseMeaningsList($: CheerioAPI): void {
   meaningsList.value = $(".ar")
-    .map((_index: number, element: Element) => $(element).html())
+    .map((_index: number, element: Element) => {
+      const el = $(element).clone();
+      el.find('a[onclick]').removeAttr('onclick');
+      el.find('a[href^="javascript:"]').attr('href', '#');
+      return el.html();
+    })
     .get();
 }
 
 function parseNoMatchList($: CheerioAPI): void {
   noMatchList.value = $(".nomatch")
-    .find("li")
-    .map((_index: number, element: Element) => $(element).text())
-    .get();
+  .find("li")
+  .map((_index: number, element: Element) => $(element).text())
+  .get();
 }
+
+watch(meaningsList, async () => {
+  await nextTick();
+  document.querySelectorAll(".ar a").forEach((el) => {
+    const audio = el.closest('.audio')?.querySelector('audio');
+    if (audio) {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        (audio as HTMLAudioElement).play();
+      });
+    }
+  });
+});
 
 watch(
   props,
